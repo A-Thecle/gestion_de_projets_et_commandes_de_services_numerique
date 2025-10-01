@@ -1,0 +1,84 @@
+<div class="admin-layout">
+  <!-- Header horizontal -->
+  <header class="header">
+    <div class="logo">INNOV-T Madagascar</div>
+
+    <div class="header-actions">
+      <input
+        type="text"
+        placeholder="Rechercher..."
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()"
+        class="search-input"
+      />
+      <!-- Icône de notification alignée avec client layout -->
+      <div class="notification-bell">
+        <button mat-icon-button (click)="toggleNotifications()" >
+          <mat-icon>notifications</mat-icon>
+          <span class="badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+        </button>
+        <div class="notification-dropdown" *ngIf="showNotifications">
+          <div class="notification-list">
+            <div *ngIf="notifications.length === 0">Aucune notification</div>
+            <div
+              *ngFor="let notification of notifications"
+              class="notification-item"
+              [ngClass]="{'read': notification.isRead}"
+            >
+              <p>{{ notification.message }}</p>
+              <span>{{ notification.createdAt | date: 'short' }}</span>
+              <button
+                mat-button
+                *ngIf="!notification.isRead"
+                (click)="markAsRead(notification.id)"
+              >
+                Marquer comme lu
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="icone-messagerie">
+        <button mat-icon-button routerLink="/admin/messagerie" aria-label="Messagerie">
+          <mat-icon>message</mat-icon>
+          <span class="badge" *ngIf="compteMessagesNonLus > 0">{{ compteMessagesNonLus }}</span>
+        </button>
+      </div>
+      <a class="logout-btn" (click)="openLogoutModal()" aria-label="Déconnexion">Déconnecter</a>
+    </div>
+  </header>
+
+  <!-- Sidebar vertical -->
+  <aside class="sidebar">
+    <nav>
+      <ul>
+        <li><a routerLink="/admin/home" routerLinkActive="active">Accueil</a></li>
+        <li><a routerLink="/admin/commandes" routerLinkActive="active">Tous les commandes</a></li>
+        <li><a routerLink="/admin/projets" routerLinkActive="active">Tous les projets</a></li>
+        <li><a routerLink="/admin/messagerie" routerLinkActive="active">Messagerie</a></li>
+        <li><a routerLink="/admin/clients/liste" routerLinkActive="active">Liste des clients</a></li>
+        <li><a routerLink="/admin/services" routerLinkActive="active">Tous les services</a></li>
+        <li><a routerLink="/admin/temoignages" routerLinkActive="active">Voir témoignages clients</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Zone de contenu principal -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Modal de confirmation de déconnexion -->
+  <div class="modal-backdrop" *ngIf="showLogoutModal" role="dialog" aria-labelledby="logout-modal-title">
+    <div class="modal-content">
+      <button class="close-btn" (click)="closeLogoutModal()" aria-label="Fermer le modal">✕</button>
+      <span class="modal-icon">🚪</span>
+      <h2 id="logout-modal-title">Confirmer la déconnexion</h2>
+      <p class="description">Voulez-vous vraiment vous déconnecter ?</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" (click)="closeLogoutModal()">Annuler</button>
+        <button class="btn-confirm" (click)="confirmLogout()">Confirmer</button>
+      </div>
+    </div>
+  </div>
+</div>

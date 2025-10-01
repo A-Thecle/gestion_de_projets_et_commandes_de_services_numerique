@@ -1,0 +1,74 @@
+<div class="contact-rapide">
+  <h2>Contactez-Nous Rapidement</h2>
+  <form (ngSubmit)="sendMessage(contactForm)" #contactForm="ngForm" novalidate>
+
+    
+    <div class="form-group">
+      <label for="email">Votre Email :</label>
+      <div class="input-wrapper">
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="contact.email"
+          name="email"
+          placeholder="exemple@domaine.com"
+          required
+          email
+          [ngClass]="{'invalid': contactForm.controls['email']?.invalid && contactForm.controls['email']?.touched}"
+        >
+        <span class="icon">📧</span>
+      </div>
+      <div *ngIf="contactForm.controls['email']?.invalid && contactForm.controls['email']?.touched" class="error">
+        Veuillez entrer un email valide.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="objet">Objet :</label>
+      <div class="input-wrapper">
+        <input
+          type="text"
+          id="objet"
+          [(ngModel)]="contact.objet"
+          name="objet"
+          placeholder="Sujet de votre message"
+          required
+          [ngClass]="{'invalid': contactForm.controls['objet']?.invalid && contactForm.controls['objet']?.touched}"
+        >
+        <span class="icon">📝</span>
+      </div>
+      <div *ngIf="contactForm.controls['objet']?.invalid && contactForm.controls['objet']?.touched" class="error">
+        L'objet est requis.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Message :</label>
+      <div class="input-wrapper">
+        <textarea
+          id="message"
+          [(ngModel)]="contact.message"
+          name="message"
+          placeholder="Votre message ici..."
+          required
+          [ngClass]="{'invalid': contactForm.controls['message']?.invalid && contactForm.controls['message']?.touched}"
+        ></textarea>
+        <span class="icon">💬</span>
+      </div>
+      <div *ngIf="contactForm.controls['message']?.invalid && contactForm.controls['message']?.touched" class="error">
+        Le message est requis.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="contactForm.invalid">Envoyer</button>
+  </form>
+
+  <!-- Modal de succès -->
+<div class="confirmation-modal" *ngIf="showSuccessModal">
+  <div class="modal-content">
+    <h3>{{ successMessage }}</h3>
+    <button (click)="closeSuccessModal()" style="background-color:white">OK</button>
+  </div>
+</div>
+
+</div>

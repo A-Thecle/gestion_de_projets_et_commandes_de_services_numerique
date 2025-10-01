@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Modifier Projet</h2>
+<div mat-dialog-content>
+  <form [formGroup]="projetForm">
+    <mat-form-field class="w-100">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName="titre_projet">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description_projet"></textarea>
+    </mat-form-field>
+
+   <mat-form-field class="w-100">
+  <mat-label>État</mat-label>
+  <mat-select formControlName="etat">
+    <mat-option value="en_attente">En attente</mat-option>
+    <mat-option value="en_cours">En cours</mat-option>
+    <mat-option value="en_revision">En révision</mat-option>
+    <mat-option value="termine">Terminé</mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+    <mat-form-field class="w-100">
+      <mat-label>Date Livraison</mat-label>
+      <input matInput type="date" formControlName="date_livraison_prevue">
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Annuler</button>
+  <button mat-flat-button color="primary" (click)="onSaveEdit()">Enregistrer</button>
+</div>
+

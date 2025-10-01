@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Modifier Client</h2>
+<mat-dialog-content>
+  <form [formGroup]="editForm">
+    <mat-form-field class="full-width">
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="nom" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Prénom</mat-label>
+      <input matInput formControlName="prenom" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Téléphone</mat-label>
+      <input matInput type="number" formControlName="telephone" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annuler</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="!editForm.valid">
+    Enregistrer
+  </button>
+</mat-dialog-actions>
+

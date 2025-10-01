@@ -1,0 +1,41 @@
+<div class="modal-container">
+  <h2 mat-dialog-title>Modifier le service</h2>
+  <mat-dialog-content>
+    <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Nom du service</mat-label>
+        <input matInput formControlName="nom_service" placeholder="Entrez le nom du service">
+        <mat-error *ngIf="serviceForm.get('nom_service')?.hasError('required')">
+          Le nom du service est requis
+        </mat-error>
+        <mat-error *ngIf="serviceForm.get('nom_service')?.hasError('minlength')">
+          Le nom doit contenir au moins 3 caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description_service" placeholder="Entrez la description du service"></textarea>
+        <mat-error *ngIf="serviceForm.get('description_service')?.hasError('required')">
+          La description est requise
+        </mat-error>
+        <mat-error *ngIf="serviceForm.get('description_service')?.hasError('minlength')">
+          La description doit contenir au moins 10 caractères
+        </mat-error>
+      </mat-form-field>
+
+       <!-- Prix minimum -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Prix minimum</mat-label>
+      <textarea matInput formControlName="prix_minimum" placeholder="Entrez le prix minimum"></textarea>
+      <mat-error *ngIf="serviceForm.get('prix_minimum')?.hasError('required')">
+        Le prix minimum est requis
+      </mat-error>
+    </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Annuler</button>
+    <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="serviceForm.invalid">Enregistrer</button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,68 @@
+<div *ngIf="loading">Chargement des projets...</div>
+
+<div class="commandes-cards" *ngIf="!loading">
+  <div class="commande-card" *ngFor="let projet of paginatedProjet"> <!-- Changed from projets to paginatedProjet -->
+    <div class="card-header">
+      {{ projet.titre_projet }}
+      <span>{{ projet.etat }}</span>
+    </div>
+
+    <div class="card-body">
+        <p><strong>Description:</strong> 
+        {{ projet.description_projet.length > 20 ? (projet.description_projet | slice:0:20) + '...' : projet.description_projet }}
+        <button *ngIf="projet.description_projet.length > 20" class="btn-voir-plus" (click)="openDescriptionModal(projet.description_projet)">Voir plus</button>
+      </p>
+      <p><strong>Date livraison :</strong> {{ projet.date_livraison_prevue | date:'shortDate' }}</p>
+      
+      <p *ngIf="projet.commande"><strong>Commande :</strong> {{ projet.commande?.commandes_id }}</p>
+      
+      <p *ngIf="projet.commande">
+        <strong>Client :</strong> {{ projet.commande?.client?.nom }} {{ projet.commande?.client?.prenom }}
+      </p>
+      
+      <p *ngIf="projet.commande"><strong>Service :</strong> {{ projet.commande?.service?.nom_service }}</p>
+    
+    <p *ngIf="projet.documents_partages?.length">
+  <strong>Documents partagés :</strong>
+  <span *ngFor="let doc of projet.documents_partages">
+    <a [href]="encodeFileUrl(doc)" target="_blank"> Ouvrir le document</a>
+  </span>
+</p>
+
+
+    </div>
+
+    <div class="card-footer">
+      <button class="btn-valider" (click)="openEditDialog(projet)"><i class="fas fa-edit"></i></button>
+      <button class="btn-refuser" (click)="deleteProjet(projet)">  <i class="fas fa-trash"></i></button>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Modal pour la description complète -->
+  <div class="modal-backdrop" *ngIf="showDescriptionModal">
+    <div class="modal-content">
+      <button class="close-btn" (click)="closeDescriptionModal()">&times;</button>
+      <h2>Description complète</h2>
+      <p class="description">{{ selectedDescription }}</p>
+      <div class="modal-actions">
+        <button class="btn-close" (click)="closeDescriptionModal()">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+<!-- ✅ Modal succès modification projet -->
+<div class="confirmation-modal" *ngIf="showSuccessModal">
+  <div class="modal-content">
+    <h3>{{ successMessage }}</h3>
+    <button (click)="closeSuccessModal()">OK</button>
+  </div>
+</div>
+
+<!-- Pagination -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Précédent</button>
+    <span>Page {{currentPage}} / {{totalPages}}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant</button>
+  </div>

@@ -1,0 +1,63 @@
+/* Applique un joli fond dégradé à l'en-tête */
+.mat-mdc-dialog-title {
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 16px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Contenu du formulaire */
+mat-dialog-content {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Champs du formulaire */
+mat-form-field.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Labels */
+mat-label {
+  font-weight: 500;
+  color: #2E0F66; /* violet foncé de ta charte */
+}
+
+/* Inputs */
+input[matInput] {
+  background-color: white;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+/* Actions (boutons en bas du modal) */
+mat-dialog-actions {
+  padding: 12px 20px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #fafafa;
+}
+
+/* Bouton Annuler */
+button[mat-button] {
+  color: #0077C8;
+  font-weight: bold;
+}
+
+/* Bouton Sauvegarder */
+button[mat-flat-button] {
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 6px 18px;
+  transition: 0.3s ease-in-out;
+}
+
+button[mat-flat-button]:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}

@@ -1,0 +1,140 @@
+.home-client {
+  padding: 20px;
+  background: #f5f5f5; /* Fond neutre (gris clair) */
+  min-height: 100vh; /* Assure que la section couvre toute la hauteur */
+  color: #333; /* Texte sombre pour lisibilité */
+}
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* Applique le dégradé au texte */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Ombre légère pour lisibilité */
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto; /* Centre la grille */
+}
+
+.card {
+  background: #fff; /* Fond blanc pour les cartes */
+  padding: 20px;
+  border: 2px solid transparent; /* Bordure initiale transparente */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Légère élévation au survol */
+  border-color: #0077C8; /* Bordure bleue au survol */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée */
+}
+
+.card .icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #5DD35C; /* Vert de la charte pour les icônes */
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  color: #2E0F66; /* Violet foncé pour les titres */
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #666; /* Texte gris pour les descriptions */
+  margin: 0;
+}
+
+/* Modification pour centrer le h2 */
+.header {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  min-height: 10vh; /* Hauteur minimale pour un centrage vertical visible */
+}
+
+/* Le reste reste inchangé */
+.notification-bell {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.notification-list {
+  padding: 10px;
+}
+
+.notification-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.notification-item.read {
+  background-color: #f5f5f5;
+}
+
+.notification-item p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.notification-item span {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+    gap: 15px;
+  }
+
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .card .icon {
+    font-size: 2rem;
+  }
+}

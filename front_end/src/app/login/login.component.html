@@ -1,0 +1,56 @@
+<div class="public-layout">
+ 
+
+  <!-- Formulaire de connexion centré -->
+  <div class="login-container">
+    <h2 class="title">Connexion</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="verifyLogin()">
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+  {{ errorMessage }}
+      </div>
+
+      <div class="form-group">
+        <label for="emailOrPhone">Email ou Numéro de téléphone</label>
+        <input
+          type="text"
+          id="emailOrPhone"
+          formControlName="emailOrPhone"
+          class="form-control"
+          [class.is-invalid]="loginForm.get('emailOrPhone')?.invalid && loginForm.get('emailOrPhone')?.touched"
+        >
+        <div *ngIf="loginForm.get('emailOrPhone')?.invalid && loginForm.get('emailOrPhone')?.touched" class="invalid-feedback">
+          Ce champ est requis.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="mot_de_passe">Mot de passe</label>
+        <input
+          type="password"
+          id="mot_de_passe"
+          formControlName="mot_de_passe"
+          class="form-control"
+          [class.is-invalid]="loginForm.get('mot_de_passe')?.invalid && loginForm.get('mot_de_passe')?.touched"
+        >
+        <div *ngIf="loginForm.get('mot_de_passe')?.invalid && loginForm.get('mot_de_passe')?.touched" class="invalid-feedback">
+          Le mot de passe doit contenir au moins 6 caractères.
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="loginForm.invalid" >Se connecter</button>
+    </form>
+
+    <div *ngIf="errorMessage" class="alert-error">
+      {{ errorMessage }}
+    </div>
+
+    <div class="register-link-container">
+    <p>Vous n'avez pas de compte ? 
+  <a class="btn-register" [routerLink]="['/inscription']">S'inscrire</a>
+</p>
+
+    </div>
+  </div>
+
+ 
+</div>

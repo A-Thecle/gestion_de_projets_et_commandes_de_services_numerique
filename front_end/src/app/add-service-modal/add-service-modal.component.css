@@ -1,0 +1,159 @@
+/* Style global du modal */
+.mat-mdc-dialog-container {
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-in-out;
+}
+
+/* En-tête du modal */
+.mat-mdc-dialog-title {
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+  padding: 18px 24px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  position: relative;
+  text-align: center;
+}
+
+/* Contenu du modal */
+mat-dialog-content {
+  padding: 24px;
+  background-color: #fdfdfd;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Champs du formulaire */
+mat-form-field.w-100 {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Labels */
+mat-label {
+  font-weight: 500;
+  color: #2E0F66;
+  font-size: 1rem;
+}
+
+/* Inputs, textarea et select */
+input[matInput], textarea[matInput], mat-select {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  transition: border-color 0.3s ease;
+}
+
+input[matInput]:focus, textarea[matInput]:focus, mat-select:focus {
+  border-color: #0077C8;
+  outline: none;
+}
+
+/* Style pour le menu déroulant */
+mat-select .mat-mdc-select-value {
+  color: #2E0F66;
+}
+
+mat-option {
+  color: #2E0F66;
+}
+
+mat-option:hover {
+  background-color: #5DD35C !important;
+  color: white;
+}
+
+/* Actions (boutons) */
+mat-dialog-actions {
+  padding: 16px 24px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Bouton Annuler */
+button[mat-button] {
+  color: #0077C8;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  transition: color 0.2s ease;
+}
+
+button[mat-button]:hover {
+  color: #5DD35C;
+}
+
+/* Bouton Enregistrer */
+button[mat-flat-button] {
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 8px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+button[mat-flat-button]:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button[mat-flat-button][disabled] {
+  background: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Animation pour l'ouverture du modal */
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive pour petits écrans */
+@media (max-width: 768px) {
+  .mat-mdc-dialog-container {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .mat-mdc-dialog-title {
+    font-size: 1.25rem;
+    padding: 14px 20px;
+  }
+
+  mat-dialog-content {
+    padding: 16px;
+  }
+
+  mat-form-field.w-100 {
+    margin-bottom: 16px;
+  }
+
+  mat-dialog-actions {
+    padding: 12px 16px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  button[mat-button], button[mat-flat-button] {
+    width: 100%;
+    padding: 10px;
+  }
+}

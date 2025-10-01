@@ -1,0 +1,137 @@
+/* Container principal pour les quatre colonnes */
+.projets-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* Chaque colonne */
+.projet-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Titre de chaque colonne */
+.column-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif; 
+  color: #333; 
+  background-color: #f8f9fa; /* Fond clair pour un effet neumorphique */
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase; /* Majuscules pour un look affirmé */
+  letter-spacing: 1px; /* Espacement des lettres pour élégance */
+  border-radius: 12px; /* Coins arrondis plus prononcés */
+  border: 2px solid transparent; /* Bordure invisible par défaut */
+  background-image: linear-gradient(white, white), linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66); /* Bordure gradientée */
+  background-clip: padding-box, border-box; 
+  box-shadow: 
+    5px 5px 10px rgba(0, 0, 0, 0.1), 
+    -5px -5px 10px rgba(255, 255, 255, 0.7); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.column-title:hover {
+  transform: scale(1.02); /* Agrandissement léger au survol */
+  box-shadow: 
+    8px 8px 15px rgba(0, 0, 0, 0.15), 
+    -8px -8px 15px rgba(255, 255, 255, 0.9);
+  border-color: #0077C8; /* Bordure bleu vif au survol */
+}
+
+/* Container des cartes dans chaque colonne */
+.projets-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Carte individuelle */
+.projet-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.projet-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* En-tête de la carte */
+.card-header {
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+/* Corps de la carte */
+.card-body {
+  padding: 10px 15px;
+  color: #333;
+  font-size: 14px;
+}
+
+.card-body p {
+  margin: 5px 0;
+}
+
+/* Message quand il n'y a pas de projets */
+.no-projets {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+/* Style pour le chargement */
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 20px;
+}
+
+.details-link {
+  color: white;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.details-link:hover {
+  color: #5DD35C; /* Une couleur du gradient pour l'effet survol */
+}
+
+/* Responsivité pour les titres */
+@media (max-width: 1200px) {
+  .projets-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .column-title {
+    font-size: 1.5rem;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .projets-container {
+    grid-template-columns: 1fr;
+  }
+  .column-title {
+    font-size: 1.3rem;
+    padding: 10px;
+  }
+}

@@ -1,0 +1,52 @@
+<div class="actions-container">
+  <button class="btn btn-fiche" (click)="openAddServiceModal()">
+    <i class="fas fa-plus"></i> Ajout nouveau service
+  </button>
+</div>
+
+<div *ngIf="loading" class="loading">Chargement des services...</div>
+
+<div class="commandes-cards" *ngIf="!loading && (services || []).length > 0">
+  <div class="client-card" *ngFor="let service of pagedServices">
+    <div class="card-header">
+      <span class="code-utilisateur">{{ service.service_id }}</span>
+      <span class="client-nom">{{ service.nom_service }}</span>
+    </div>
+
+    <div class="card-body">
+      <p><strong>Description:</strong> {{ service.description_service }}</p>
+      <p><strong>Prix_minimum:</strong> {{ service.prix_minimum }} Ar </p>
+    </div>
+
+    <div class="card-footer">
+      <div class="action-buttons">
+        <button class="btn btn-modifier" title="Modifier" (click)="openEditDialog(service)">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="btn btn-supprimer" title="Supprimer" (click)="deleteService(service)">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Pagination (déplacée à l'intérieur pour une meilleure structure) -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Précédent</button>
+    <span>Page {{currentPage}} / {{totalPages}}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant</button>
+  </div>
+  <!-- Modal de succès -->
+<div class="confirmation-modal" *ngIf="showSuccessModal">
+  <div class="modal-content">
+    <h3>{{ successMessage }}</h3>
+    <button (click)="showSuccessModal = false">OK</button>
+  </div>
+</div>
+
+</div>
+
+<div *ngIf="!loading && (services || []).length === 0" class="no-clients">
+  Aucun service trouvé.
+</div>

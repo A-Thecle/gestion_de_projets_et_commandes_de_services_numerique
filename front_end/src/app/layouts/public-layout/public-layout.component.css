@@ -1,0 +1,44 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 🔹 prend toute la hauteur de l’écran */
+}
+
+.main-content {
+  flex: 1; /* 🔹 occupe l’espace libre et pousse le footer en bas */
+}
+
+/* ✅ Navbar InnovT */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  color: white;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.navbar a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* ✅ Footer toujours collé en bas */
+.footer {
+  text-align: center;
+  padding: 15px;
+  background: #2E0F66;
+  color: white;
+}

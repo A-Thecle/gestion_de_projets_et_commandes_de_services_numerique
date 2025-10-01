@@ -1,0 +1,18 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <h2>Détails du projet</h2>
+    <button class="close-btn" (click)="close()">✕</button>
+  </div>
+  
+  <div class="dialog-body">
+    <p><strong>Titre :</strong> {{ data.titre_projet }}</p>
+    <p><strong>Description :</strong> {{ data.description_projet }}</p>
+    <p><strong>Date d'échéance :</strong> {{ data.date_livraison_prevue | date:'dd/MM/yyyy' }}</p>
+    <p *ngIf="data.commande && data.commande.montant_final != null"><strong>Prix estimé :</strong> {{ data.commande.montant_final | currency:'AR' }}</p>
+    <p *ngIf="!data.commande || data.commande.montant_final == null"><strong>Prix estimé :</strong> Non défini</p>
+  </div>
+  
+  <div class="dialog-footer">
+    <button class="btn-close" (click)="close()">Fermer</button>
+  </div>
+</div>

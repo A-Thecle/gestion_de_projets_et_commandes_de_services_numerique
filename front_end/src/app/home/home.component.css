@@ -1,0 +1,412 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* Elimine scroll vertical et horizontal */
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  flex-shrink: 0;
+}
+
+.navbar .logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.navbar a {
+  color: white;
+  margin: 0 20px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.navbar a:hover {
+  color: #5DD35C;
+  transform: translateY(-2px);
+}
+
+.btn-login {
+  background: #2E0F66;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-login:hover {
+  background: #5DD35C;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Présentation + services */
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  background: #f9f9f9;
+  flex: 1;
+  overflow: hidden;
+}
+
+.intro {
+  flex: 1.5; /* Increased flex to make intro larger */
+  margin-right: 10px;
+  max-width: 500px; /* Increased max-width for more space */
+  overflow: hidden;
+}
+
+.intro h1 {
+  font-size: 2.8rem; /* Larger font size */
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.intro p {
+  font-size: 1.1rem; /* Larger font size */
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #5DD35C, #0077C8);
+  color: white;
+  border: none;
+  padding: 10px 20px; /* Larger padding */
+  border-radius: 6px;
+  font-size: 1rem; /* Larger font size */
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 15px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.services-cards {
+  flex: 1.2; /* Adjusted to fit three services without scroll */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Maintain 2 columns */
+  gap: 10px;
+  align-items: flex-start; /* Changed to flex-start to prevent stretching */
+  height: auto; /* Allow height to adjust naturally */
+  max-height: none; /* Remove fixed max-height to eliminate scroll */
+  overflow-y: hidden; /* Ensure no vertical scroll */
+  min-width: 0; /* Ensure proper grid behavior */
+  overflow-x: hidden; /* Added to eliminate horizontal scroll */
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 8px; /* Slightly larger radius for modern look */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow for depth */
+  padding: 20px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.3s ease; /* Smoother transition */
+  position: relative;
+  width: 100%; /* Ensure card fits within grid column */
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-8px); /* Larger lift on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.service-card:hover::before {
+  opacity: 0.2; /* Subtle gradient overlay */
+}
+
+.service-card h3 {
+  font-size: 1.3rem; /* Larger font for title */
+  color: #2E0F66;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.service-card p {
+  font-size: 0.9rem; /* Slightly larger font */
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.service-card p strong {
+  color: #0077C8;
+  font-weight: 700; /* Bolder price text */
+}
+
+.service-card .icon {
+  font-size: 2rem; /* Icon size */
+  color: #5DD35C; /* Green from gradient */
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.service-card:hover .icon {
+  color: #0077C8; /* Blue on hover */
+}
+
+.service-card:nth-child(3) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 35%;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  padding: 10px 0;
+  text-align: left;
+  background: #f9f9f9;
+  margin-left: 10px;
+  flex: 0.8;
+}
+
+.testimonials-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 5px 0;
+}
+
+.testimonial-card {
+  width: 180px; /* Keep the same size */
+  min-height: 90px;
+  background: #fff;
+  border-radius: 6px; /* Slightly larger radius */
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease; /* Smoother transition */
+  position: relative;
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px); /* Slight lift on hover */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-card:hover::before {
+  opacity: 0.1; /* Subtle gradient overlay */
+}
+
+.testimonial-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.avatar-placeholder {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #eee;
+  position: relative;
+}
+
+.avatar-placeholder::before {
+  content: '\f007'; /* Font Awesome user icon as example */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #2E0F66;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+}
+
+.client-info strong {
+  display: block;
+  font-size: 0.9rem; /* Slightly larger */
+  color: #2E0F66;
+}
+
+.rating {
+  color: #0077C8;
+  font-size: 0.9rem;
+  display: flex;
+  gap: 2px;
+}
+
+.star.full {
+  color: #0077C8;
+}
+
+.star.empty {
+  color: #ccc;
+}
+
+.comment {
+  margin: 8px 0;
+  color: #333;
+  font-size: 0.60rem; /* Slightly larger */
+}
+
+.meta {
+  font-size: 9px;
+  color: #777;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 10px;
+  background: linear-gradient(90deg, #2E0F66, #0077C8);
+  color: white;
+  font-size: 0.8rem;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+}
+
+.testimonials-section  h4{
+  font-size: 2.8rem; /* Larger font size */
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  font-size: 25px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  .navbar .logo {
+    margin-bottom: 10px;
+  }
+
+  .navbar a {
+    margin: 5px 10px;
+  }
+
+  .btn-login {
+    margin-top: 10px;
+  }
+
+  .top-section {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .intro {
+    margin-right: 0;
+    margin-bottom: 15px;
+    max-width: 100%;
+  }
+
+  .intro h1 {
+    font-size: 2.2rem;
+  }
+
+  .services-cards {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
+
+  .service-card {
+    min-height: 130px;
+  }
+
+  .testimonial-card {
+    width: 160px;
+  }
+
+  .footer {
+    padding: 8px;
+    font-size: 0.7rem;
+  }
+}

@@ -1,0 +1,6 @@
+
+PATCH http://localhost:3000/commandes/:commandeId/status
+Content-Type: application/json
+{
+  "status": "VALIDEE"
+}

@@ -1,0 +1,88 @@
+<div class="profile-container">
+  <h2 class="profile-title"><i class="fas fa-user"></i> Mon Profil</h2>
+
+  <div *ngIf="loading" class="loading">Chargement du profil...</div>
+
+  <div *ngIf="!loading && client" class="profile-content">
+    <!-- Colonne gauche : Informations personnelles -->
+    <section class="profile-info">
+      <h3><i class="fas fa-info-circle"></i> Informations personnelles</h3>
+      <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="nom" placeholder="Entrez votre nom">
+          <mat-error *ngIf="profileForm.get('nom')?.hasError('required')">
+            Le nom est requis
+          </mat-error>
+          <mat-error *ngIf="profileForm.get('nom')?.hasError('minlength')">
+            Le nom doit contenir au moins 3 caractères
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Prénom</mat-label>
+          <input matInput formControlName="prenom" placeholder="Entrez votre prénom">
+          <mat-error *ngIf="profileForm.get('prenom')?.hasError('required')">
+            Le prénom est requis
+          </mat-error>
+          <mat-error *ngIf="profileForm.get('prenom')?.hasError('minlength')">
+            Le prénom doit contenir au moins 3 caractères
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Entrez votre email">
+          <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
+            L'email est requis
+          </mat-error>
+          <mat-error *ngIf="profileForm.get('email')?.hasError('email')">
+            L'email doit être valide
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Téléphone</mat-label>
+          <input matInput formControlName="telephone" placeholder="Entrez votre numéro de téléphone">
+          <mat-error *ngIf="profileForm.get('telephone')?.hasError('pattern')">
+            Le numéro de téléphone doit être valide
+          </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-button type="button" class="btn btn-cancel" (click)="profileForm.reset()">Annuler</button>
+          <button mat-button type="submit" class="btn btn-submit" [disabled]="profileForm.invalid">Enregistrer</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Colonne droite : Commandes et projets -->
+    <section class="profile-details">
+      <!-- Mes commandes -->
+      <div class="commandes">
+        <h3><i class="fas fa-shopping-cart"></i> Mes commandes</h3>
+        <div class="commandes-list">
+          <div *ngIf="commandes.length === 0" class="no-data">Aucune commande trouvée</div>
+          <div *ngFor="let commande of commandes" class="commande-card">
+            <p><strong>Service :</strong> {{ commande.service.nom_service }}</p>
+            <p><strong>Date :</strong> {{ commande.date_commande | date: 'medium' }}</p>
+            <p><strong>Statut :</strong> {{ commande.statut_commande }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Liste des projets -->
+      <div class="projets">
+        <h3><i class="fas fa-project-diagram"></i> Mes projets</h3>
+        <div class="projets-list">
+          <div *ngIf="projets.length === 0" class="no-data">Aucun projet trouvé</div>
+          <div *ngFor="let projet of projets" class="projet-card">
+            <p><strong>Nom :</strong> {{ projet.titre_projet }}</p>
+            <p><strong>Description :</strong> {{ projet.description_projet }}</p>
+            <p><strong>Statut :</strong> {{ projet.etat }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

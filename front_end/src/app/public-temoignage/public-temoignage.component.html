@@ -1,0 +1,36 @@
+<div>
+    <h2>Témoignages Clients</h2>
+
+    <div class="testimonials-row" *ngIf="publishedTemoignages.length > 0;">
+        <div class="testimonials-line">
+            <article class="testimonial-card" *ngFor="let t of publishedTemoignages; let i = index">
+                <div class="testimonial-header">
+                    <div class="avatar-placeholder"></div>
+                    <div class="client-info">
+                        <strong>{{ t.client?.nom }} {{ t.client?.prenom }}</strong>
+                        <div class="rating">
+                            <!-- étoiles pleines -->
+                            <ng-container *ngFor="let _ of getStars(t.note)">
+                                <span class="star full">★</span>
+                            </ng-container>
+                            <!-- étoiles vides -->
+                            <ng-container *ngFor="let _ of getEmptyStars(t.note)">
+                                <span class="star empty">☆</span>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="comment">{{ t.commentaire }}</p>
+
+                <div class="meta">
+                    <span class="date">{{ t.date_soumission | date: 'dd/MM/yyyy' }}</span>
+                    <span class="project-title" *ngIf="t.projet">{{ t.projet.titre_projet }}</span>
+                </div>
+            </article>
+        </div>
+        <hr class="separator" *ngIf="publishedTemoignages.length > 0">
+    </div>
+
+    
+</div>

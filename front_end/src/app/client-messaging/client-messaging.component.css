@@ -1,0 +1,274 @@
+/* Conteneur principal de la messagerie */
+.messagerie-conteneur {
+  display: flex;
+  height: calc(100vh - 60px); /* Ajusté pour un en-tête similaire à l'admin */
+  background: #f0f2f5; /* Fond gris clair, inspiré de Facebook */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Liste des projets (colonne de gauche) */
+.liste-projets {
+  width: 30%;
+  padding: 15px;
+  background: #ffffff; /* Fond blanc */
+  border-right: 1px solid #e0e0e0; /* Bordure plus douce */
+  overflow-y: auto;
+  height: 100vh; /* S'assurer que la liste prend toute la hauteur */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Ombre légère pour un effet moderne */
+}
+
+.projets-titre {
+  font-size: 1.25rem; /* Légèrement plus grand pour plus de présence */
+  margin-bottom: 15px; /* Plus d'espace en bas */
+  color: #2E0F66; /* Conserver le violet de la charte */
+  font-weight: 600;
+  text-transform: uppercase; /* Pour un look plus structuré */
+  letter-spacing: 0.5px;
+}
+
+.liste-projets ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.projet-item {
+  cursor: pointer;
+  padding: 12px 15px; /* Réduire le padding pour un look plus compact */
+  border-radius: 6px;
+  margin-bottom: 8px; /* Espace entre les éléments */
+  transition: all 0.3s ease; /* Transition plus fluide pour toutes les propriétés */
+  color: #333; /* Couleur de texte neutre */
+  font-size: 0.95rem; /* Taille de texte légèrement plus petite */
+  display: flex; /* Pour aligner le contenu et le badge */
+  justify-content: space-between; /* Espacer le texte et le badge */
+  align-items: center; /* Centrer verticalement */
+}
+
+.projet-item:hover {
+  background: #f0f4ff; /* Fond bleu très clair pour le survol */
+  color: #2E0F66; /* Violet pour le texte au survol */
+  transform: translateX(5px); /* Déplacement subtil pour une micro-interaction */
+}
+
+.projet-selectionne {
+  background: #e6efff; /* Bleu pâle pour le projet sélectionné */
+  color: #2E0F66; /* Violet pour le texte */
+  font-weight: 500; 
+  box-shadow: inset 0 0 0 2px #0077C8; 
+}
+
+.badge-nonlus {
+  background: #0077C8 ; /* Couleur corail pour le badge, plus harmonieuse */
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.projet-selectionne .badge-nonlus {
+  background: #2E0F66; /* Violet pour le badge dans le projet sélectionné */
+  color: white;
+}
+
+/* Fenêtre de chat (colonne de droite) */
+.fenetre-chat {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+.chat-header {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ccc;
+  background: linear-gradient(90deg, #5DD35C, #0077C8); /* Dégradé de la charte */
+  color: white;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.liste-messages {
+  flex: 1;
+  max-height: 400px; /* Conservation du scroll */
+  overflow-y: auto;
+  padding: 15px;
+  background: #f0f2f5;
+}
+
+.message-container {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.message-container.envoye {
+  justify-content: flex-end;
+}
+
+.message-container.recu {
+  justify-content: flex-start;
+}
+
+.message-bulle {
+  max-width: 60%;
+  padding: 8px 12px;
+  border-radius: 16px;
+  position: relative;
+  line-height: 1.3;
+}
+
+.envoye .message-bulle {
+  background: #0077C8; /* Bleu de la charte pour les messages du client */
+  color: white;
+  border-top-right-radius: 4px; /* Coin plat à droite, comme Facebook */
+}
+
+.recu .message-bulle {
+  background: #e4e6eb; /* Gris pour les messages de l'admin */
+  color: #1c2526;
+  border-top-left-radius: 4px; /* Coin plat à gauche */
+}
+
+.message-contenu {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.message-date {
+  display: block;
+  font-size: 0.7rem;
+  opacity: 0.6;
+  margin-top: 3px;
+  text-align: right;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: white;
+  border-top: 1px solid #ccc;
+  border-radius: 20px;
+  gap: 8px; /* Espacement entre les éléments */
+}
+
+/* Style pour le bouton icône d'envoi */
+.envoyer-icon-btn {
+  background: none; /* Pas de fond pour un look minimaliste */
+  border: none; /* Supprimer la bordure */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Taille fixe pour un cercle */
+  height: 40px;
+  border-radius: 50%; /* Forme circulaire */
+  transition: background-color 0.2s ease; /* Transition fluide */
+}
+
+.envoyer-icon-btn:hover {
+  background-color: #e0e0e0; /* Fond gris clair au survol */
+}
+
+.envoyer-icon-btn .material-icons {
+  font-size: 24px; /* Taille de l'icône */
+  color: #0077C8; /* Bleu de la charte graphique */
+}
+
+.envoyer-icon-btn:focus {
+  outline: none; /* Supprimer le contour au focus */
+}
+
+/* Conteneur pour le téléchargement de fichiers */
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.file-upload-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  color: #3f51b5; /* Couleur principale de Material */
+  font-size: 14px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.file-upload-label:hover {
+  background-color: #f5f5f5;
+}
+
+.file-selected {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #555;
+}
+
+.file-selected span {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message-image img {
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+mat-form-field {
+  flex: 1;
+  margin-right: 8px;
+}
+
+mat-form-field .mat-form-field-outline {
+  border-color: #2E0F66; /* Violet de la charte */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .messagerie-conteneur {
+    flex-direction: column;
+  }
+
+  .liste-projets {
+    width: 100%;
+    max-height: 30vh;
+  }
+
+  .fenetre-chat {
+    width: 100%;
+  }
+
+  .liste-messages {
+    max-height: 400px; /* Conservation du scroll sur mobile */
+  }
+
+  .message-bulle {
+    max-width: 75%;
+  }
+
+  .envoyer-icon-btn {
+    width: 36px; /* Réduire légèrement la taille sur mobile */
+    height: 36px;
+  }
+
+  .envoyer-icon-btn .material-icons {
+    font-size: 20px; /* Ajuster la taille de l'icône sur mobile */
+  }
+}

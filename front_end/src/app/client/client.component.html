@@ -1,0 +1,49 @@
+<div *ngIf="loading" class="loading">Chargement des clients...</div>
+
+<div class="commandes-cards" *ngIf="!loading && (clients || []).length > 0">
+  <div class="client-card" *ngFor="let client of clients">
+    <div class="card-header">
+      <span class="code-utilisateur">{{ client.code_utilisateur }}</span>
+      <span class="client-nom">{{ client.nom }} {{ client.prenom }}</span>
+    </div>
+
+    <div class="card-body">
+      <p><strong>Email:</strong> {{ client.email }}</p>
+      <p><strong>Téléphone:</strong> {{ client.telephone }}</p>
+    </div>
+
+    <div class="card-footer">
+      <button class="btn btn-fiche" (click)="openFicheClient(client)">Voir fiche client</button>
+      <div class="action-buttons">
+        <button class="btn btn-modifier" title="Modifier" (click)="openEditDialog(client)">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="btn btn-supprimer" title="Supprimer" (click)="deleteClient(client)">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loading && (clients || []).length === 0" class="no-clients">
+  Aucun client trouvé.
+</div>
+
+<!-- ✅ Modal succès modification projet -->
+<div class="confirmation-modal" *ngIf="showSuccessModal">
+  <div class="modal-content">
+    <h3>{{ successMessage }}</h3>
+    <button (click)="closeSuccessModal()">OK</button>
+  </div>
+</div>
+
+
+   <!-- Pagination -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Précédent</button>
+    <span>Page {{currentPage}} / {{totalPages}}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant</button>
+  </div>
+
+

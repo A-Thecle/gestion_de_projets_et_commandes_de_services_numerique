@@ -1,0 +1,246 @@
+/* Style pour le message de chargement */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  margin-top: none;
+}
+
+/* Style pour le message "Aucun service trouvé" */
+.no-clients {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+  margin-top: 20px;
+}
+
+/* Container des cartes */
+.commandes-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
+  gap: 20px; /* Espacement entre les cartes */
+  margin-top: none;
+  padding: 20px; /* Augmenter légèrement le padding */
+}
+
+/* Carte individuelle */
+.client-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.client-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* En-tête de la carte */
+.card-header {
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  color: white;
+  padding: 12px; 
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 16px; /* Taille de police légèrement plus grande */
+}
+
+/* Corps de la carte */
+.card-body {
+  padding: 15px; /* Plus d'espace interne */
+  color: #333;
+  font-size: 15px; /* Texte plus lisible */
+}
+
+.card-body p {
+  margin: 8px 0; /* Espacement entre les lignes */
+}
+
+/* Pied de la carte */
+.card-footer {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #f8f9fa; /* Fond clair pour démarquer le footer */
+}
+
+/* Conteneur pour les boutons d'action à droite */
+.action-buttons {
+  display: flex;
+  gap: 10px; /* Espacement entre les boutons */
+}
+
+/* Style commun pour les boutons */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacement entre l'icône et le texte */
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Bouton "Ajout nouveau service" */
+.btn-fiche {
+  background-color: #2E0F66; /* Rouge-violet plus sombre au survol */
+  
+  color: white;
+}
+
+.btn-fiche:hover {
+  background-color: #2E0F66; /* Rouge-violet plus sombre au survol */
+  
+}
+
+/* Bouton "Modifier" */
+.btn-modifier {
+  background-color: #0077C8; /* Bleu de la charte graphique */
+}
+
+.btn-modifier:hover {
+  background-color: #005fa3; /* Bleu plus sombre au survol */
+}
+
+/* Bouton "Supprimer" */
+.btn-supprimer {
+  background-color: #2E0F66; /* Rouge-violet inspiré de #2E0F66 */
+}
+
+.btn-supprimer:hover {
+  background-color: #2E0F66; /* Rouge-violet plus sombre au survol */
+}
+
+/* Conteneur pour le bouton d'ajout */
+.actions-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+/* Style pour l'icône dans les boutons */
+.btn i {
+  font-size: 14px;
+}
+
+
+
+* Pagination fixe en bas */
+.pagination {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #0077C8;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.pagination button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #005fa3;
+}
+
+
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.confirmation-modal .modal-content {
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  color: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.confirmation-modal .modal-content button {
+  margin: 10px 5px 0 5px;
+  padding: 8px 20px;
+  border: none;
+  background-color: white;
+  color: #2E0F66;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+
+/* Responsivité pour petits écrans */
+@media (max-width: 768px) {
+  .commandes-cards {
+    grid-template-columns: 1fr; /* Une seule colonne sur petits écrans */
+    gap: 15px;
+  }
+
+  .card-footer {
+    flex-direction: column; /* Empiler les boutons sur petits écrans */
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .action-buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .actions-container {
+    justify-content: center;
+  }
+
+  .btn-fiche {
+    padding: 10px 20px;
+  }
+}
