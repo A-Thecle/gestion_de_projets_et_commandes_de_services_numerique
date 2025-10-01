@@ -62,7 +62,7 @@ export class AuthService {
     nom: string;
     prenom: string;
     email: string;
-    telephone: number;
+    telephone: string;
     mot_de_passe: string;
     role?: 'client' | 'admin';
   }): Observable<Utilisateur> {

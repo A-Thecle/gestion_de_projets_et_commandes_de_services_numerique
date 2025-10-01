@@ -20,7 +20,7 @@ export class CreateAdminSeed {
       prenom: 'admin',
       email: 'admin@gmail.com',
       mot_de_passe: await bcrypt.hash('admin123', 10),
-      telephone: 345075609,
+      telephone: '+261 34 50 756 09',
       role: 'admin',
     });
 

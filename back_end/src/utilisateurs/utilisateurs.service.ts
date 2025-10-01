@@ -33,17 +33,15 @@ export class UtilisateursService {
   async findByEmailOrPhone(emailOrPhone: string) {
     let user;
 
-    // Nettoyer l'entrée : supprimer espaces, tirets, etc.
-    const cleanedInput = emailOrPhone.replace(/[\s-+]/g, '');
+    
+   const cleanedInput = emailOrPhone.replace(/\s+/g, ''); 
 
-    // Vérifier si l'entrée nettoyée est un numéro de téléphone (contient majoritairement des chiffres)
+
+   
     if (/^\+?\d+$/.test(cleanedInput)) {
-      // Convertir cleanedInput en number pour correspondre au type int de la colonne telephone
-      const phoneNumber = Number(cleanedInput);
-      if (isNaN(phoneNumber)) {
-        return null; // Gérer le cas où la conversion échoue
-      }
-      user = await this.userRepo.findOneBy({ telephone: phoneNumber });
+      
+     user = await this.userRepo.findOneBy({ telephone: cleanedInput });
+
     } else {
       // Recherche par email (insensible à la casse)
       user = await this.userRepo.findOneBy({ email: ILike(emailOrPhone.toLowerCase()) }); // Utiliser ILike pour insensible à la casse
@@ -126,11 +124,10 @@ export class UtilisateursService {
   if (updateUtilisateurDto.email) {
     updateUtilisateurDto.email = updateUtilisateurDto.email.toLowerCase();
   }
-
-  if (updateUtilisateurDto.telephone) {
-    updateUtilisateurDto.telephone = Number(updateUtilisateurDto.telephone);
-  }
-
+  // updateClient
+if (updateUtilisateurDto.telephone) {
+    updateUtilisateurDto.telephone = updateUtilisateurDto.telephone.replace(/\s+/g, '');
+}
   Object.assign(user, updateUtilisateurDto);
 
   if (updateUtilisateurDto.mot_de_passe) {

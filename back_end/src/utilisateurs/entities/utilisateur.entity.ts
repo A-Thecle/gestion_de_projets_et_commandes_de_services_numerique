@@ -26,7 +26,7 @@ export class Utilisateur {
   mot_de_passe: string = "";
 
   @Column()
-  telephone: number = 0;
+  telephone: string = "";
 
   @Column({ type: 'enum', enum: ['admin', 'client'], default: 'client' })
   role: 'admin' | 'client' = 'client';

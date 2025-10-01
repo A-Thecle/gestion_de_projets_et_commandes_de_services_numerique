@@ -19,7 +19,7 @@ export class CreateUtilisateurDto {
 
   @IsNotEmpty()
   @IsString()
-  telephone: number = 0;
+  telephone: string = "";
 
   @IsOptional()
   @IsEnum(['admin', 'client'])

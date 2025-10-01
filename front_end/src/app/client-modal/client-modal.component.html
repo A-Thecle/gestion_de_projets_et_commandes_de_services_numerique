@@ -11,7 +11,7 @@
     
     <h3>{{ clientFiche.prenom }} {{ clientFiche.nom }}</h3>
     <p>Email: {{ clientFiche.email }}</p>
-    <p>Téléphone: {{ clientFiche.telephone }}</p>
+    <p><strong>Téléphone:</strong>+ {{ formatClientPhone(clientFiche.telephone) }}</p>
   </div>
 
   <!-- Card Commandes -->

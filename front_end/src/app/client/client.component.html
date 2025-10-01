@@ -9,7 +9,8 @@
 
     <div class="card-body">
       <p><strong>Email:</strong> {{ client.email }}</p>
-      <p><strong>Téléphone:</strong> {{ client.telephone }}</p>
+      <p><strong>Téléphone:</strong>+ {{ formatClientPhone(client.telephone) }}</p>
+
     </div>
 
     <div class="card-footer">

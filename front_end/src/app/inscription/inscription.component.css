@@ -151,6 +151,19 @@
   cursor: pointer;
 }
 
+.phone-input {
+  display: flex;
+  gap: 5px;
+}
+
+.phone-prefix {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+}
+
+
 
 
 

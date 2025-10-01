@@ -41,13 +41,12 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Téléphone</mat-label>
-          <input matInput formControlName="telephone" placeholder="Entrez votre numéro de téléphone">
-          <mat-error *ngIf="profileForm.get('telephone')?.hasError('pattern')">
-            Le numéro de téléphone doit être valide
-          </mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="fill" class="w-100">
+  <mat-label>Téléphone</mat-label>
+  <!-- Affichage formaté -->
+  <input matInput [value]="formatClientPhone(client?.telephone)" readonly>
+</mat-form-field>
+
 
         <div class="form-actions">
           <button mat-button type="button" class="btn btn-cancel" (click)="profileForm.reset()">Annuler</button>

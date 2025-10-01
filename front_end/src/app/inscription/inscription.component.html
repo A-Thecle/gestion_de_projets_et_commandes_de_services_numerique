@@ -24,11 +24,32 @@
           [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" autocomplete="off">
       </div>
 
-      <div class="form-group">
-        <label for="telephone">Téléphone</label>
-        <input type="text" id="telephone" formControlName="telephone" class="form-control"
-          [class.is-invalid]="registerForm.get('telephone')?.invalid && registerForm.get('telephone')?.touched" autocomplete="off">
-      </div>
+   <div class="form-group">
+  <label for="telephone">Téléphone</label>
+  <div class="phone-input">
+    <select formControlName="prefix" class="phone-prefix">
+      <option value="+261">+261</option>
+      <option value="+33">+33</option>
+      <option value="+1">+1</option>
+      <!-- Ajoutez d'autres pays si nécessaire -->
+    </select>
+    <input
+      type="text"
+      id="telephone"
+      formControlName="telephone"
+      class="form-control"
+      placeholder="00 00 000 00"
+      [class.is-invalid]="registerForm.get('telephone')?.invalid && registerForm.get('telephone')?.touched"
+      (input)="formatPhoneNumber()"
+      autocomplete="off"
+    >
+  </div>
+  <div class="invalid-feedback" *ngIf="registerForm.get('telephone')?.touched && registerForm.get('telephone')?.invalid">
+    Veuillez entrer un numéro de téléphone valide (8 à 10 chiffres après le préfixe).
+  </div>
+</div>
+
+
 
       <div class="form-group">
         <label for="mot_de_passe">Mot de passe</label>

@@ -162,6 +162,39 @@ export class ClientComponent implements OnInit, OnDestroy {
     });
   }
 
+formatClientPhone(phone: string | number | null | undefined): string {
+  if (!phone) return '';
+
+  // Convertir en string et supprimer les espaces
+  let phoneStr = String(phone).replace(/\s+/g, '');
+
+  // Extraire le préfixe (ex: +261, +33, etc.)
+  let prefix = '';
+  let number = phoneStr;
+
+  const prefixMatch = phoneStr.match(/^(\+\d{1,3})(\d+)/);
+  if (prefixMatch) {
+    prefix = prefixMatch[1]; // +261
+    number = prefixMatch[2]; // reste du numéro
+  }
+
+  // Vérifier que le numéro a au moins 12 chiffres (ou plus)
+  if (number.length < 12) return prefix ? `${prefix} ${number}` : number;
+
+  // Formater exactement en blocs 3 2 2 3 2
+  const part1 = number.substring(0, 3);
+  const part2 = number.substring(3, 5);
+  const part3 = number.substring(5, 7);
+  const part4 = number.substring(7, 10);
+  const part5 = number.substring(10, 12);
+
+  const formatted = `${part1} ${part2} ${part3} ${part4} ${part5}`;
+
+  return prefix ? `${prefix} ${formatted}` : formatted;
+}
+
+
+
   closeSuccessModal(): void {
     this.showSuccessModal = false;
   }
