@@ -1,0 +1,87 @@
+/* Titre du dialog avec bouton croix */
+h2.dialog-title {
+  display: flex;
+  justify-content: space-between; /* titre à gauche, croix à droite */
+  align-items: center;
+  background: linear-gradient(90deg, #c62828, #b71c1c) ;
+  color: #ffffff;
+  padding: 16px 20px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Bouton croix */
+.close-btn {
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Contenu du dialog */
+[mat-dialog-content] {
+  padding: 24px;
+  color: #333333;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Actions (boutons) */
+[mat-dialog-actions] {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Boutons uniformes */
+button[mat-button],
+button[mat-raised-button] {
+  width: 130px;
+  padding: 10px 0;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Bouton Annuler */
+button[mat-button]:not([color="warn"]) {
+  background-color: #f1f3f5;
+  color: #333333;
+}
+
+button[mat-button]:not([color="warn"]):hover {
+  background-color: #e2e6ea;
+  transform: translateY(-1px);
+}
+
+/* Bouton Supprimer */
+/* Bouton Supprimer - cohérent mais alertant */
+button[mat-raised-button][color="warn"] {
+  background: linear-gradient(90deg, #c62828, #b71c1c); /* rouge profond élégant */
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(183, 28, 28, 0.3);
+  transition: all 0.3s ease;
+}
+
+button[mat-raised-button][color="warn"]:hover {
+  background: linear-gradient(90deg, #b71c1c, #8e0000);
+  box-shadow: 0 4px 10px rgba(183, 28, 28, 0.4);
+  transform: translateY(-1px);
+}
+

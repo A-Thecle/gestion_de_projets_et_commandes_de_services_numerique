@@ -6,12 +6,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Utilisateur } from './entities/utilisateur.entity';
 import * as bcrypt from 'bcrypt';
 import { ILike } from 'typeorm'; // Import ILike pour recherche insensible à la casse (si PostgreSQL)
+import { NotificationGateway } from 'src/notifications/notification.gateway';
 
 @Injectable()
 export class UtilisateursService {
   constructor(
     @InjectRepository(Utilisateur)
     private userRepo: Repository<Utilisateur>,
+    private readonly notificationGateway: NotificationGateway,
   ) {}
 
   async validateUser(emailOrPhone: string, pass: string): Promise<any> {
@@ -50,31 +52,43 @@ export class UtilisateursService {
     return user;
   }
 
-  async createUser(dto: CreateUtilisateurDto) {
-    const utilisateur = new Utilisateur();
-    utilisateur.nom = dto.nom;
-    utilisateur.prenom = dto.prenom;
-    utilisateur.email = dto.email.toLowerCase(); // Normaliser l'email
-    utilisateur.telephone = dto.telephone;
-    utilisateur.role = dto.role || 'client';
-    utilisateur.mot_de_passe = await bcrypt.hash(dto.mot_de_passe, 10);
+async createUser(dto: CreateUtilisateurDto) {
+  const utilisateur = new Utilisateur();
+  utilisateur.nom = dto.nom;
+  utilisateur.prenom = dto.prenom;
+  utilisateur.email = dto.email.toLowerCase();
+  utilisateur.telephone = dto.telephone;
+  utilisateur.role = dto.role || 'client';
+  utilisateur.mot_de_passe = await bcrypt.hash(dto.mot_de_passe, 10);
 
-    const prefix = utilisateur.role === 'admin' ? 'AD' : 'CL';
-    const dernier = await this.userRepo.findOne({
-      where: { role: utilisateur.role },
-      order: { id: 'DESC' },
-    });
+  const prefix = utilisateur.role === 'admin' ? 'AD' : 'CL';
+  const dernier = await this.userRepo.findOne({
+    where: { role: utilisateur.role },
+    order: { id: 'DESC' },
+  });
 
-    let numero = 1;
-    if (dernier && dernier.code_utilisateur) {
-      const dernierNum = parseInt(dernier.code_utilisateur.split('-')[1], 10);
-      numero = dernierNum + 1;
-    }
-
-    utilisateur.code_utilisateur = `${prefix}-${String(numero).padStart(3, '0')}`;
-
-    return this.userRepo.save(utilisateur);
+  let numero = 1;
+  if (dernier && dernier.code_utilisateur) {
+    const dernierNum = parseInt(dernier.code_utilisateur.split('-')[1], 10);
+    numero = dernierNum + 1;
   }
+
+  utilisateur.code_utilisateur = `${prefix}-${String(numero).padStart(3, '0')}`;
+
+  const savedUser = await this.userRepo.save(utilisateur);
+
+  // ✅ Envoi notification aux admins
+  if (utilisateur.role === 'client') {
+    const message = `Nouveau client inscrit: ${utilisateur.prenom} ${utilisateur.nom} (${utilisateur.email})`;
+    // Il faut injecter NotificationGateway dans le service ou utiliser un EventEmitter
+    if (this.notificationGateway) {
+      await this.notificationGateway.sendNotificationToAdmins(message, 'NEW_CLIENT');
+    }
+  }
+
+  return savedUser;
+}
+
 
   async getAllUser(): Promise<Utilisateur[]> {
     return await this.userRepo.find({

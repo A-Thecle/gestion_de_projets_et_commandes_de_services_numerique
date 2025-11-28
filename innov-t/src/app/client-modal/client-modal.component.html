@@ -1,0 +1,72 @@
+<!-- En-tête du modal -->
+<div class="modal-header">
+  <h2 mat-dialog-title>Fiche Client</h2>
+  <button class="header-close-btn" (click)="close()" aria-label="Fermer le modal">✕</button>
+</div>
+
+<!-- Loading -->
+<div mat-dialog-content *ngIf="loading" class="loading">
+  <div class="spinner"></div>
+  <p>Chargement des données...</p>
+</div>
+
+<!-- Contenu principal -->
+<div mat-dialog-content *ngIf="!loading && clientFiche" class="client-content">
+
+  <!-- En-tête du client -->
+  <div class="client-header">
+    <div class="avatar-container"></div>
+    <div class="client-info">
+      <h3>{{ clientFiche.prenom }} {{ clientFiche.nom }}</h3>
+      <p><strong>Email :</strong> {{ clientFiche.email }}</p>
+      <p><strong>Téléphone :</strong> {{ formatClientPhone(clientFiche.telephone) }}</p>
+    </div>
+  </div>
+
+  <!-- Liste des commandes -->
+  <div class="card" *ngIf="clientFiche.commandes?.length > 0">
+    <div class="card-header">
+      <h4>Commandes récentes ({{ clientFiche.commandes.length }})</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-container">
+        <table class="table-commandes">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Service</th>
+              <th>Statut</th>
+              <th>Date Commande</th>
+              <th>Date Livraison</th>
+              <th>Montant (Ar)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cmd of deuxDernieresCommandes">
+              <td>{{ cmd.commandes_id }}</td>
+              <td>{{ cmd.service?.nom_service }}</td>
+              <td>
+                <span class="status-badge" [class]="'status-' + cmd.statut_commande.toLowerCase().replace(' ', '-')">
+                  {{ cmd.statut_commande }}
+                </span>
+              </td>
+              <td>{{ cmd.date_commande | date:'dd/MM/yyyy' }}</td>
+              <td>{{ cmd.date_livraison ? (cmd.date_livraison | date:'dd/MM/yyyy') : '-' }}</td>
+              <td>{{ cmd.montant_estime | number:'1.0-0' }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aucune commande -->
+  <div class="card empty-card" *ngIf="clientFiche.commandes?.length === 0">
+    <p class="text-muted">Aucune commande pour ce client.</p>
+  </div>
+</div>
+
+<!-- Bouton de fermeture -->
+<div mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-flat-button color="primary" class="close-btn" (click)="close()">Fermer</button>
+</div>

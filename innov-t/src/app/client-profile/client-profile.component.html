@@ -1,0 +1,110 @@
+<div class="profile-container">
+ <h2 class="profile-title">
+  <i class="fas fa-user"></i>
+  <span>Mon Profil</span>
+</h2>
+
+
+  <div *ngIf="loading" class="loading">Chargement du profil...</div>
+
+  <div *ngIf="!loading && client" class="profile-content">
+    <!-- Colonne gauche : Informations personnelles -->
+    <section class="profile-info">
+    <h2 class="profile-section-title">
+  <i class="fas fa-info-circle"></i> Informations personnelles 
+  <span class="info-subtitle">(Vous pouvez modifier vos infos ici)</span>
+</h2>
+
+      <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="nom" placeholder="Entrez votre nom">
+          <mat-error *ngIf="profileForm.get('nom')?.hasError('required')">
+            Le nom est requis
+          </mat-error>
+          <mat-error *ngIf="profileForm.get('nom')?.hasError('minlength')">
+            Le nom doit contenir au moins 3 caractères
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Prénom</mat-label>
+          <input matInput formControlName="prenom" placeholder="Entrez votre prénom">
+          <mat-error *ngIf="profileForm.get('prenom')?.hasError('required')">
+            Le prénom est requis
+          </mat-error>
+          <mat-error *ngIf="profileForm.get('prenom')?.hasError('minlength')">
+            Le prénom doit contenir au moins 3 caractères
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Entrez votre email">
+          <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
+            L'email est requis
+          </mat-error>
+          <mat-error *ngIf="profileForm.get('email')?.hasError('email')">
+            L'email doit être valide
+          </mat-error>
+        </mat-form-field>
+<mat-form-field appearance="fill" class="w-100">
+  <mat-label>Téléphone</mat-label>
+  <input matInput formControlName="telephone" placeholder="Entrez votre numéro">
+  <mat-error *ngIf="profileForm.get('telephone')?.hasError('pattern')">
+    Le numéro doit contenir uniquement des chiffres (10 à 15)
+  </mat-error>
+</mat-form-field>
+
+
+
+        <div class="form-actions">
+          <button mat-button type="button" class="btn btn-cancel" (click)="profileForm.reset()">Annuler</button>
+          <button mat-flat-button type="submit" class="btn btn-submit" [disabled]="profileForm.invalid">Enregistrer</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Colonne droite : Commandes et projets -->
+    <section class="profile-details">
+      <!-- Mes commandes -->
+      <div class="commandes">
+        <h2><i class="fas fa-shopping-cart"></i> Mes commandes</h2>
+        <div class="commandes-list">
+          <div *ngIf="commandes.length === 0" class="no-data">Aucune commande trouvée</div>
+          <div *ngFor="let commande of commandes" class="commande-card">
+            <p><strong>Service :</strong> {{ commande.service.nom_service }}</p>
+            <p><strong>Date :</strong> {{ commande.date_commande | date: 'dd/MM/yyyy hh:mm' }}</p>
+           <p><strong>date_livraison prévue :</strong> {{ commande.date_livraison | date : 'dd/MM/yyyy' }}</p>
+
+</div>
+        </div>
+      </div>
+
+      <!-- Liste des projets -->
+      <div class="projets">
+        <h2> <mat-icon>work</mat-icon> Mes projets</h2>
+        <div class="projets-list">
+          <div *ngIf="projets.length === 0" class="no-data">Aucun projet trouvé</div>
+          <div *ngFor="let projet of projets" class="projet-card">
+            <p><strong>Nom :</strong> {{ projet.titre_projet }}</p>
+            <p><strong>Description :</strong> {{ projet.description_projet }}</p>
+            <p><strong>Statut :</strong> {{ projet.etat }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+   <!-- Modal de succès -->
+  <div class="confirmation-modal" *ngIf="showSuccessModal">
+    <div class="modal-content">
+       <h3>
+      
+      Succès
+      </h3>
+      <p>{{ successMessage }}</p>
+      <button (click)="showSuccessModal = false">OK</button>
+    </div>
+  </div>
+</div>

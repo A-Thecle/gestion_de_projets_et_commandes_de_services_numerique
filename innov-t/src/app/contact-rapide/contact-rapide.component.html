@@ -1,0 +1,102 @@
+<div class="contact-wrapper">
+
+  <!-- === COLONNE GAUCHE : IMAGE (50%) === -->
+<div class="contact-image">
+  <img src="assets/code2.jpeg" alt="Contact INNOV-T" class="side-image">
+  
+<div class="image-overlay">
+    <!-- Message motivant / chaleureux -->
+    <div class="quote">
+      <h3>« Parlons de vos projets »</h3>
+      <p>Une question ou une idée ? Nous sommes là pour y répondre.</p>
+    </div>
+
+    <!-- Avantages / Ce que l'utilisateur gagne -->
+    <div class="contact-advantages">
+      <ul>
+        <li><strong>Réponse rapide :</strong> Sous 24h.</li>
+        <li><strong>Support dédié :</strong> Équipe experte.</li>
+        <li><strong>Solutions sur-mesure :</strong> Conseils adaptés.</li>
+      </ul>
+    </div>
+
+    <!-- Logo & branding -->
+    <div class="brand">
+      <img src="assets/innov.jpg" alt="Logo" class="brand-logo">
+      <span>INNOV-T MADAGASCAR</span>
+    </div>
+</div>
+
+</div>
+
+  <!-- === COLONNE DROITE : FORMULAIRE (50%) === -->
+  <div class="contact-form-container">
+    <div class="contact-rapide enhanced">
+
+      <h2 class="title">Contactez-Nous Rapidement</h2>
+
+      <form (ngSubmit)="sendMessage(contactForm)" #contactForm="ngForm" novalidate>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Votre Email :</label>
+          <div class="input-wrapper">
+            <input type="email" id="email" [(ngModel)]="contact.email" name="email"
+                   placeholder="exemple@domaine.com" required email
+                   [ngClass]="{'is-invalid': contactForm.controls['email']?.invalid && contactForm.controls['email']?.touched}">
+            
+    <span class="icon">📧</span>
+          </div>
+          <div *ngIf="contactForm.controls['email']?.invalid && contactForm.controls['email']?.touched" class="invalid-feedback">
+            Veuillez entrer un email valide.
+          </div>
+        </div>
+
+        <!-- Objet -->
+        <div class="form-group">
+          <label for="objet">Objet :</label>
+          <div class="input-wrapper">
+            <input type="text" id="objet" [(ngModel)]="contact.objet" name="objet"
+                   placeholder="Sujet de votre message" required
+                   [ngClass]="{'is-invalid': contactForm.controls['objet']?.invalid && contactForm.controls['objet']?.touched}">
+          <span class="icon">📝</span>
+          </div>
+          <div *ngIf="contactForm.controls['objet']?.invalid && contactForm.controls['objet']?.touched" class="invalid-feedback">
+            L'objet est requis.
+          </div>
+        </div>
+
+        <!-- Message -->
+        <div class="form-group">
+          <label for="message">Message :</label>
+          <div class="input-wrapper">
+            <textarea id="message" [(ngModel)]="contact.message" name="message"
+                      placeholder="Votre message ici..." rows="5" required
+                      [ngClass]="{'is-invalid': contactForm.controls['message']?.invalid && contactForm.controls['message']?.touched}"></textarea>
+                <span class="icon">💬</span>
+          </div>
+          <div *ngIf="contactForm.controls['message']?.invalid && contactForm.controls['message']?.touched" class="invalid-feedback">
+            Le message est requis.
+          </div>
+        </div>
+
+        <!-- Boutons -->
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" (click)="resetForm(contactForm)">Annuler</button>
+          <button type="submit" class="btn-submit" [disabled]="contactForm.invalid">Envoyer</button>
+        </div>
+
+      </form>
+
+      <!-- Modal succès -->
+      <div class="confirmation-modal" *ngIf="showSuccessModal">
+        <div class="modal-content">
+          <h3>Succès</h3>
+          <p>{{ successMessage }}</p>
+          <button (click)="closeSuccessModal()">OK</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,156 @@
+:root {
+  --primary: #007C89;
+  --primary-light: #26A3AF;
+  --white: #ffffff;
+  --gray: #d1d5db;
+  --dark-gray: #4a4a4a;
+  --footer-bg: #f8f9fa;
+}
+
+/* Style pour le message de chargement */
+.loading, .no-clients {
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* Conteneur des cartes */
+.commandes-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Carte individuelle */
+.client-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,124,137,0.15);
+  background: white;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.client-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,124,137,0.2);
+}
+
+/* En-tête de la carte */
+.card-header {
+  background: #007C89;
+  color:white;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 1rem;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Corps de la carte */
+.card-body {
+  padding: 15px 16px;
+  font-size: 0.95rem;
+  color:#4a4a4a;
+}
+.card-body p {
+  margin: 6px 0;
+}
+
+/* Pied de la carte */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #f8f9fa;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Boutons */
+.btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+.btn-fiche {
+  background: white;
+  color:#007C89;
+  border: 1px solid #007C89;
+}
+.btn-fiche:hover {
+  background: #007C89;
+  color: white;
+  transform: translateY(-2px);
+}
+.btn-modifier {
+  background: #007C89;
+  color:white;
+}
+.btn-modifier:hover {
+  background: #26A3AF;
+  transform: translateY(-2px);
+}
+.btn-supprimer {
+  background: #e74c3c;
+  color: white;
+}
+.btn-supprimer:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+
+
+/* Pagination */
+pagination-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+pagination-controls button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+pagination-controls button:hover:not(:disabled) {
+  background: var(--primary-light);
+}
+pagination-controls button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .commandes-cards {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .action-buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

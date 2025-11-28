@@ -1,0 +1,94 @@
+<div *ngIf="loading">Chargement des projets...</div>
+
+<div class="commandes-cards" *ngIf="!loading && projets.length > 0">
+  <div 
+    class="commande-card text-center" 
+    *ngFor="let projet of projets | paginate: { itemsPerPage: 6, currentPage: currentPage }">
+    
+    <div class="card-header">
+      {{ projet.titre_projet }}
+      <span>{{ projet.etat }}</span>
+    </div>
+
+    <div class="card-body">
+      <p *ngIf="projet.commande">
+        <strong>Client :</strong> {{ projet.commande?.client?.nom }} {{ projet.commande?.client?.prenom }}
+      </p>
+        <p *ngIf="projet.commande"><strong>Service :</strong> {{ projet.commande?.service?.nom_service }}</p>
+      <p><strong>Description:</strong> 
+        {{ projet.description_projet.length > 20 
+          ? (projet.description_projet | slice:0:20) + '...' 
+          : projet.description_projet }}
+        <button 
+          *ngIf="projet.description_projet.length > 20" 
+          class="btn-voir-plus" 
+          (click)="openDescriptionModal(projet.description_projet)">
+          Voir plus
+        </button>
+      </p>
+    <p><strong>Date commande :</strong> {{ projet.commande?.date_commande | date:'dd/MM/yyyy' }}</p>
+<p><strong>Date livraison :</strong> {{ projet.date_livraison_prevue | date:'dd/MM/yyyy' }}</p>
+
+      <p *ngIf="projet.commande"><strong>Commande :</strong> {{ projet.commande?.commandes_id }}</p>
+      
+    
+
+      <p>
+    <strong>Documents partagés :</strong>
+    <ng-container *ngIf="projet.documents_partages?.length; else noDocs">
+      <span *ngFor="let doc of projet.documents_partages">
+        <a [href]="encodeFileUrl(doc)" target="_blank" style="color: #0077C8;">Ouvrir le document</a>
+      </span>
+    </ng-container>
+    <ng-template #noDocs>
+      <span style="color: #888;">Aucun document partagé</span>
+    </ng-template>
+  </p>
+   
+    </div>
+
+    <div class="card-footer">
+      <button class="btn-valider" (click)="openEditDialog(projet)">
+        <i class="fas fa-edit"></i>
+      </button>
+      <button class="btn-refuser" (click)="deleteProjet(projet)">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ✅ Modal pour afficher la description complète -->
+<div class="modal-backdrop" *ngIf="showDescriptionModal">
+  <div class="modal-conten">
+    <button class="close-btn" (click)="closeDescriptionModal()">&times;</button>
+    <h2>Description complète</h2>
+    <p class="description">{{ selectedDescription }}</p>
+   
+  </div>
+</div>
+
+  <!-- Modal de succès -->
+  <div class="confirmation-modal" *ngIf="showSuccessModal">
+    <div class="modal-content">
+       <h3>
+         Succès
+      </h3>
+
+      <p >{{ successMessage }}</p>
+      <button (click)="showSuccessModal = false">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- Pagination -->
+<pagination-controls 
+  (pageChange)="currentPage = $event"
+  previousLabel="« Précédent" 
+  nextLabel="Suivant »" 
+  class="d-flex justify-content-center mt-4"
+  [autoHide]="false"
+  [responsive]="true"
+  [maxSize]="5"
+  [directionLinks]="true">
+</pagination-controls>

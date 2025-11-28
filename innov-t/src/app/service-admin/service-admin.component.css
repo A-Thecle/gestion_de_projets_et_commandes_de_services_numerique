@@ -1,0 +1,156 @@
+/* ===== GENERAL ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.loading, .no-clients {
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* ===== CONTENEUR CARTES ===== */
+.commandes-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* ===== CARTE SERVICE ===== */
+.client-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.client-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== HEADER ===== */
+.card-header {
+  background: #007C89;
+  color: white;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 16px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* ===== BODY ===== */
+.card-body {
+  padding: 15px;
+  color: #333;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.card-body p {
+  margin: 8px 0;
+}
+
+/* ===== FOOTER ===== */
+.card-footer {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: flex-end; /* boutons alignés à droite */
+  align-items: center;
+  gap: 10px;
+  background-color: #f8f9fa;
+}
+
+/* ===== BOUTONS ===== */
+.btn {
+   padding: 8px 12px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  padding-left: 12px;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Ajout service */
+.btn-fiche {
+  background: linear-gradient(90deg,  #007C89);
+  padding: 10px 18px;
+}
+.btn-fiche:hover {
+   background: #006F7C;
+  transform: translateY(-2px);
+}
+/* ESPACE ENTRE LES BOUTONS MODIFIER & SUPPRIMER */
+.action-buttons {
+  display: flex;
+  gap: 14px;               /* ESPACE ENTRE LES BOUTONS */
+  justify-content: flex-end;
+  padding: 8px 12px 0 0;
+}
+
+/* Garde tes boutons intacts, juste un peu d'air ! */
+.action-buttons .btn {
+  }
+/* Modifier */
+
+.btn-modifier {
+  background: #007C89;
+}
+.btn-modifier:hover {
+  background: #26A3AF;
+}
+
+/* Supprimer */
+.btn-supprimer {
+  background: #e74c3c;
+}
+.btn-supprimer:hover {
+  background: #c0392b;
+}
+
+/* ===== Conteneur bouton ajout ===== */
+.actions-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .commandes-cards {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .action-buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .actions-container {
+    justify-content: center;
+  }
+  .btn-fiche {
+    padding: 10px 20px;
+  }
+}

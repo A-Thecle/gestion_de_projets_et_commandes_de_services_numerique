@@ -1,0 +1,43 @@
+<!-- HEADER / NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <div class="navbar-left">
+      <img src="assets/innov.jpg" alt="Logo INNOVT" class="logo-img" />
+      <span class="logo-text">INNOV-T MADAGASCAR</span>
+    </div>
+
+    <!-- Liens -->
+    <div class="navbar-center">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>home</mat-icon> Accueil
+      </a>
+      <a routerLink="/services" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>build</mat-icon> Services
+      </a>
+      <a routerLink="/contact" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>contact_mail</mat-icon> Contact rapide
+      </a>
+      <a routerLink="/temoignages" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>forum</mat-icon> Témoignages
+      </a>
+    </div>
+
+    <!-- Bouton Connexion -->
+    <div class="navbar-right">
+      <a routerLink="/connexion" class="btn-login">
+        <mat-icon>login</mat-icon> Se connecter
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- CONTENU -->
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2025 INNOVT-MADAGASCAR — Votre partenaire dans le monde numérique</p>
+</footer>

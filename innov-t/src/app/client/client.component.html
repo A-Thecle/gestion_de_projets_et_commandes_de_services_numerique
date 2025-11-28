@@ -1,0 +1,61 @@
+<div *ngIf="loading" class="loading">Chargement des clients...</div>
+
+<div class="commandes-cards" *ngIf="!loading && (clients || []).length > 0">
+  <div class="client-card  text-center" *ngFor="let client of clients | paginate: { itemsPerPage: 6, currentPage: currentPage }" >
+    <div class="card-header">
+      <span class="code-utilisateur">{{ client.code_utilisateur }}</span>
+      <span class="client-nom">{{ client.nom }} {{ client.prenom }}</span>
+    </div>
+
+    <div class="card-body">
+      <p><strong>Email:</strong> {{ client.email }}</p>
+      <p><strong>Téléphone:</strong> {{ formatClientPhone(client.telephone) }}</p>
+
+    </div>
+
+    <div class="card-footer">
+      <button class="btn btn-fiche" (click)="openFicheClient(client)">Voir fiche client</button>
+      <div class="action-buttons">
+        
+        <button class="btn btn-supprimer" title="Supprimer" (click)="deleteClient(client)">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loading && (clients || []).length === 0" class="no-clients">
+  Aucun client trouvé.
+</div>
+
+<!-- ✅ Modal succès modification projet -->
+<div class="confirmation-modal" *ngIf="showSuccessModal">
+  <div class="modal-content">
+   
+     <h2>
+     
+      Succès
+      </h2>
+
+      <p>{{ successMessage }}</p>
+    <button (click)="closeSuccessModal()">OK</button>
+  </div>
+</div>
+
+
+   <!-- Pagination -->
+<pagination-controls 
+  (pageChange)="currentPage = $event"
+  previousLabel="« Précédent" 
+  nextLabel="Suivant »" 
+  class="d-flex justify-content-center mt-4"
+  [autoHide]="false"
+  [responsive]="true"
+  [maxSize]="5"
+  [directionLinks]="true"
+  screenReaderPaginationLabel="Page"
+  screenReaderCurrentLabel="de {currentPage}">
+</pagination-controls>
+
+

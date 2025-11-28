@@ -40,7 +40,7 @@ export class CommandesService {
     });
 
     const savedCommande = await this.commandeRepo.save(commande);
-     // Notification à l'admin pour nouvelle commande
+     
     const adminMessage = `Nouvelle commande #${savedCommande.commandes_id} créée par ${client.prenom} ${client.nom}.`;
     await this.notificationGateway.sendNotificationToAdmins(adminMessage, 'NEW_ORDER');
 

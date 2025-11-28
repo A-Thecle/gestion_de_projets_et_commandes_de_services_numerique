@@ -1,0 +1,132 @@
+<section class="demande-service">
+  <h2 class="form-title">Demande de service</h2>
+
+  <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()" class="service-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="typeService">Type de service</label>
+        <select id="typeService" formControlName="typeService">
+          <option value="" disabled>Sélectionnez un service</option>
+          <option *ngFor="let service of services" [value]="service.service_id">
+            {{ service.nom_service }}
+          </option>
+        </select>
+        <div *ngIf="demandeForm.get('typeService')?.invalid && demandeForm.get('typeService')?.touched" class="error">
+          Veuillez sélectionner un type de service.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="deliveryDate">Date estimée de livraison</label>
+        <input
+          type="date"
+          id="deliveryDate"
+          formControlName="deliveryDate"
+          aria-required="true"
+          placeholder="jj/mm/aaaa"
+          lang="fr"
+        />
+        <div *ngIf="demandeForm.get('deliveryDate')?.invalid && demandeForm.get('deliveryDate')?.touched" class="error">
+          Veuillez sélectionner votre estimation de date de livraison
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description des besoins</label>
+      <textarea id="description" formControlName="description" rows="5" aria-required="true" placeholder="Décrivez brièvement vos besoins ici"></textarea>
+      <div *ngIf="demandeForm.get('description')?.invalid && demandeForm.get('description')?.touched" class="error">
+        La description est requise (minimum 10 caractères).
+      </div>
+    </div>
+
+  <div class="form-row">
+<!-- FICHIER JOINT – VERSION PRO AVEC SUPPRESSION -->
+<div class="form-group">
+  <label for="files">Fichier joint</label>
+  
+  <div class="file-input-wrapper" 
+       [class.has-file]="selectedFiles.length > 0"
+       (click)="openFileDialog()">
+    
+    <span class="upload-icon">
+      <i class="fas fa-paperclip"></i> <!-- icône à la place du texte -->
+    </span>
+    
+    <div class="file-text">
+      <span class="placeholder-text" *ngIf="selectedFiles.length === 0">
+        Cliquez ici
+      </span>
+      <span class="selected-text" *ngIf="selectedFiles.length > 0">
+        {{ selectedFiles.length }} fichier{{ selectedFiles.length > 1 ? 's' : '' }} sélectionné{{ selectedFiles.length > 1 ? 's' : '' }}
+      </span>
+    </div>
+
+    <button type="button" 
+            class="delete-all-btn" 
+            *ngIf="selectedFiles.length > 0"
+            (click)="clearFiles($event)"
+            title="Supprimer tous les fichiers">
+      <i class="fas fa-trash"></i>
+    </button>
+
+    <input #fileInput 
+           type="file" 
+           id="files"
+           (change)="onFileChange($event)" 
+           multiple 
+           hidden>
+  </div>
+
+  <small class="file-info">
+    <span *ngIf="selectedFiles.length === 0">
+     vous pouvez importer un fichier (pdf, png, jpg ...)
+    </span>
+    <span *ngIf="selectedFiles.length > 0">
+      {{ getFileNames() }}
+    </span>
+  </small>
+</div>
+
+
+      <div class="form-group">
+        <label for="montantFinal">Montant estimé (Ar)</label>
+        <input
+          type="number"
+          id="montantFinal"
+          formControlName="montantFinal"
+          [attr.min]="selectedService?.prix_minimum || 0"
+          placeholder="Entrez le montant estimé"
+          (input)="onMontantInput($event)"
+          aria-required="true"
+          step="1000"
+        />
+        <small *ngIf="selectedService?.prix_minimum" class="min-price-hint">
+          {{ getMinPriceHint() }}
+        </small>
+        <div *ngIf="demandeForm.get('montantFinal')?.hasError('required') && demandeForm.get('montantFinal')?.touched" class="error">
+          Le montant est obligatoire.
+        </div>
+        <div *ngIf="demandeForm.get('montantFinal')?.hasError('min') && demandeForm.get('montantFinal')?.touched" class="error">
+          Le montant doit être supérieur ou égal à {{ getMinPriceHint() }}.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="onCancel()">Annuler</button>
+      <button type="submit" [disabled]="demandeForm.invalid" class="btn-submit">Envoyer la demande</button>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </form>
+
+  <!-- Boîte de confirmation -->
+  <div class="confirmation-modal" *ngIf="showConfirmation">
+    <div class="modal-content">
+      <h3>Demande envoyée avec succès !</h3>
+      <p>Merci, vous recevrez des notifications lorsque votre commande sera validée par l’administrateur.</p>
+      <button (click)="closeConfirmation()">OK</button>
+    </div>
+  </div>
+</section>

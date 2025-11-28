@@ -1,0 +1,53 @@
+<h2 mat-dialog-title class="modal-title">
+  <mat-icon class="modal-icon">edit</mat-icon>
+  Modifier un projet
+  <button class="close-btn" (click)="onCancel()">×</button>
+</h2>
+
+<div mat-dialog-content>
+  <form [formGroup]="projetForm" class="formulaire-projet">
+
+    <!-- Titre du projet -->
+    <div class="form-group">
+      <label for="titre_projet" class="form-label">Titre du projet</label>
+      <input id="titre_projet" type="text" formControlName="titre_projet" class="form-control" placeholder="Entrez le titre du projet">
+      <div class="form-error" *ngIf="projetForm.get('titre_projet')?.hasError('required')">
+        Le titre du projet est requis
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description_projet" class="form-label">Description</label>
+      <textarea id="description_projet" rows="3" formControlName="description_projet" class="form-control" placeholder="Décrivez brièvement le projet"></textarea>
+      <div class="form-error" *ngIf="projetForm.get('description_projet')?.hasError('required')">
+        La description est requise
+      </div>
+    </div>
+
+    <!-- État du projet -->
+    <div class="form-group">
+      <label for="etat" class="form-label">État du projet</label>
+      <select id="etat" formControlName="etat" class="form-control">
+        <option value="en_attente">En attente</option>
+        <option value="en_cours">En cours</option>
+        <option value="en_revision">En révision</option>
+        <option value="termine">Terminé</option>
+      </select>
+      
+      
+    </div>
+
+    <!-- Date de livraison prévue -->
+    <div class="form-group">
+      <label for="date_livraison_prevue" class="form-label">Date de livraison prévue</label>
+      <input id="date_livraison_prevue" type="date" formControlName="date_livraison_prevue" class="form-control">
+    </div>
+
+  </form>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button class="btn-annuler" (click)="onCancel()">Annuler</button>
+  <button mat-flat-button color="primary" class="btn-enregistrer" (click)="onSaveEdit()" [disabled]="projetForm.invalid">Enregistrer</button>
+</div>

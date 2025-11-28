@@ -1,0 +1,215 @@
+/* =============================
+   DASHBOARD ADMIN - INNOV 2025
+   Couleur : #007C89 / #FFFFFF
+   Style : moderne, clair, professionnel
+   ============================= */
+
+.home-admin {
+  padding: 30px;
+  background: #f7f9fa;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+}
+
+/* 🔹 Titre principal */
+.home-admin h1 {
+  color: #007C89;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* =============================
+   🧮 Dashboard Stats
+   ============================= */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.dashboard .card {
+  background: #ffffffcc;
+  backdrop-filter: blur(6px);
+  border: 1px solid #e5e9ea;
+  border-radius: 16px;
+  text-align: center;
+  padding: 25px 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.dashboard .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 124, 137, 0.2);
+}
+
+.dashboard .icon-box {
+  background: #007C89;
+  color: #ffffff;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.3rem;
+}
+
+.dashboard .card h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.dashboard .card p {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #007C89;
+}
+
+/* =============================
+   📦 Commandes Récentes
+   ============================= */
+.recent-commands {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.recent-commands h3 {
+  color: #007C89;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.commandes-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.commande-card {
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e0e6e8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.commande-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 124, 137, 0.2);
+}
+
+/* En-tête */
+.card-header {
+  background: linear-gradient(to right, #007C89, #00a1a9);
+  color: #fff;
+  padding: 10px 14px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Corps */
+.card-body {
+  padding: 14px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.card-body strong {
+  color: #007C89;
+}
+
+/* Pied (actions) */
+.card-footer {
+  padding: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px !important;
+  border-top: 1px solid #eef3f4;
+}
+
+
+.btn-valider,
+.btn-refuser {
+  border: none;
+  border-radius: 25px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-valider {
+  background: #007C89;
+  color: #fff;
+}
+.btn-valider:hover {
+  background: #0097a7;
+}
+
+.btn-refuser {
+  background: #e74c3c;
+  color: white;
+}
+.btn-refuser:hover {
+  background: #c0392b;
+}
+
+/* Lien bas */
+.link-wrapper {
+  text-align: right;
+  margin-top: 15px;
+}
+
+.recent-commands a {
+  color: #007C89;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+.recent-commands a:hover {
+  color: #0097a7;
+}
+
+/* Message vide */
+.no-data {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* =============================
+   📱 Responsive
+   ============================= */
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+  .commandes-cards {
+    grid-template-columns: 1fr;
+  }
+}
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* ✔️ Ajoute l’espace entre Oui et Non */
+  margin-top: 15px;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}

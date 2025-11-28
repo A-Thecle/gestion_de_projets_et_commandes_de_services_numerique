@@ -1,0 +1,98 @@
+<div class="home-admin">
+  <h1>Tableau de bord administrateur</h1>
+
+  <!-- 📊 Statistiques -->
+  <div class="dashboard">
+    <div class="card">
+      <div class="icon-box"><i class="fas fa-clock"></i></div>
+      <h3>Commandes en attente</h3>
+      <p>{{ commandesEnAttente }}</p>
+    </div>
+
+    <div class="card">
+      <div class="icon-box"><i class="fas fa-tasks"></i></div>
+      <h3>Projets en cours</h3>
+      <p>{{ projetsEnCours }}</p>
+    </div>
+
+    <div class="card">
+      <div class="icon-box"><i class="fas fa-check-circle"></i></div>
+      <h3>Projets terminés</h3>
+      <p>{{ projetsTermines }}</p>
+    </div>
+  </div>
+
+  <!-- 🧾 Commandes récentes -->
+  <div class="recent-commands">
+    <h3>Commandes récentes</h3>
+
+    <div class="commandes-cards" *ngIf="commandes?.length; else noCommands">
+      <div class="commande-card" *ngFor="let cmd of commandes | slice:0:2">
+        <div class="card-header">
+          <span class="commande-id">{{ cmd.commandes_id }}</span>
+          <span class="statut">{{ cmd.statut_commande }}</span>
+        </div>
+        <div class="card-body">
+          <p><strong>Client :</strong> {{ cmd.client.nom }} {{ cmd.client.prenom }}</p>
+          <p><strong>Service :</strong> {{ cmd.service.nom_service }}</p>
+          <p><strong>Date :</strong> {{ cmd.date_commande | date:'dd/MM/yyyy' }}</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn-valider"
+                  [disabled]="cmd.statut_commande === 'acceptee' || cmd.statut_commande === 'refusee'"
+                  (click)="confirmAction(cmd.commandes_id, 'valider')">
+            Valider
+          </button>
+
+          <button class="btn-refuser"
+                  [disabled]="cmd.statut_commande === 'acceptee' || cmd.statut_commande === 'refusee'"
+                  (click)="confirmAction(cmd.commandes_id, 'refuser')">
+            Refuser
+          </button>
+        </div>
+      </div>
+        <!-- Modal de confirmation -->
+  <div class="confirmation-modal" *ngIf="showConfirmModal">
+    <div class="modal-content">
+      <h3>
+ 
+  Confirmation
+</h3>
+
+      <p>
+        Voulez-vous vraiment
+        {{ currentAction === 'valider' ? 'valider' : 'refuser' }}
+        cette commande ?
+      </p>
+      <div class="modal-actions">
+        <button (click)="executeAction()" style="color: white">Oui</button>
+        <button (click)="showConfirmModal = false" style="color: red;">Non</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Modal de succès -->
+  <div class="confirmation-modal" *ngIf="showSuccessModal">
+    <div class="modal-content">
+      <h3>
+      
+      Succès
+      </h3>
+
+      <p>{{ successMessage }}</p>
+      <button (click)="closeSuccessModal()">OK</button>
+    </div>
+  </div>
+    </div>
+
+    <ng-template #noCommands>
+      <p class="no-data">Aucune commande récente.</p>
+    </ng-template>
+
+    <div class="link-wrapper">
+      <a routerLink="/admin/commandes">Voir toutes les commandes</a>
+    </div>
+  </div>
+</div>

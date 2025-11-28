@@ -1,0 +1,46 @@
+<div class="body">
+  <!-- Services Section -->
+  <section class="services-section">
+    <h2 class="section-title">Nos Services</h2>
+    <div class="services-cards">
+      <div *ngFor="let service of services | paginate: { itemsPerPage: 2,currentPage: currentPage }; let i = index"
+           class="service-card slide-in-{{ i }}"
+           [attr.aria-label]="service.nom_service">
+        <span class="icon" [ngClass]="getIconClass(i)" [attr.aria-label]="service.nom_service"></span>
+        <h3>{{ service.nom_service }}</h3>
+        <p>{{ getFirstSentence(service.description_service) }}... 
+          <a href="#" class="details-link" (click)="openDetails($event, service)">Voir détails</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Popup (Modal) -->
+    <div class="modal-backdrop" *ngIf="selectedService" role="dialog" aria-labelledby="modal-title">
+      <div class="modal-conten">
+        <button class="close-btn" (click)="closeDetails()" aria-label="Fermer le modal">✕</button>
+        <span class="modal-icon" [ngClass]="getIconClass(services.indexOf(selectedService))" 
+              [attr.aria-label]="selectedService.nom_service"></span>
+        <h2 id="modal-title">{{ selectedService.nom_service }}</h2>
+        <p class="description">{{ selectedService.description_service }}</p>
+        <div class="modal-actions">
+       
+          <a class="btn-action" routerLink="/client/demande">Demander ce service</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Pagination -->
+<div class="pagination-container d-flex justify-content-center mt-4">
+  <pagination-controls
+    (pageChange)="pageChange($event)"
+    previousLabel="« Précédent"
+    nextLabel="Suivant »"
+    [autoHide]="false"
+    [directionLinks]="true"
+    [responsive]="true"
+    [maxSize]="5"
+    screenReaderPaginationLabel="Pagination"
+    screenReaderCurrentLabel="Page actuelle {currentPage}">
+  </pagination-controls>
+</div>

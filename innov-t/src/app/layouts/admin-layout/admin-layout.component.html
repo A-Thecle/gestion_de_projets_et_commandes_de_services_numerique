@@ -1,0 +1,95 @@
+<div class="admin-layout">
+  <!-- ==================== HEADER ==================== -->
+<header class="header">
+  <div class="header-left">
+    <img src="assets/innov.jpg" alt="Logo InnovT" class="logo-img" />
+    <h1 class="logo-text">INNOV-T MADAGASCAR</h1>
+  </div>
+
+  <div class="header-right">
+    <!-- BARRE DE RECHERCHE -->
+    <div class="search-container">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input
+        type="text"
+        placeholder="Rechercher..."
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()"
+        class="search-input"
+      />
+    </div>
+
+    <!-- ICONES + DÉCONNEXION -->
+    <div class="icon-group">
+      <button mat-icon-button (click)="toggleNotifications()" class="icon-btn" matTooltip="Notifications">
+        <mat-icon>notifications</mat-icon>
+        <span class="badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+      </button>
+   <!-- Notification Panel -->
+<div class="notifications-panel" *ngIf="showNotifications">
+  <ul>
+    <li *ngFor="let notif of notifications" (click)="markAsRead(notif.id)" [class.unread]="!notif.isRead">
+      <div class="notif-card">
+        <div class="notif-message">{{ notif.message }}</div>
+        <div class="notif-date">{{ notif.createdAt | date:'short' }}</div>
+      </div>
+    </li>
+    <li *ngIf="notifications.length === 0" class="empty">Aucune notification</li>
+  </ul>
+</div>
+
+
+      <button mat-icon-button routerLink="/admin/messagerie" class="icon-btn" matTooltip="Messagerie">
+        <mat-icon>mail</mat-icon>
+        <span class="badge" *ngIf="compteMessagesNonLus > 0">{{ compteMessagesNonLus }}</span>
+      </button>
+
+      <button mat-button (click)="openLogoutModal()" class="logout-btn">
+        <mat-icon style="color: white;">logout</mat-icon>
+        <span style="color: white;">Déconnexion</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- ==================== SIDEBAR ==================== -->
+  <aside class="sidebar">
+    <nav>
+      <ul>
+        <li><a routerLink="/admin/home" routerLinkActive="active"><mat-icon>home</mat-icon> Accueil</a></li>
+        <li><a routerLink="/admin/commandes" routerLinkActive="active"><mat-icon>shopping_cart</mat-icon> Commandes</a></li>
+        <li><a routerLink="/admin/projets" routerLinkActive="active"><mat-icon>work</mat-icon> Projets</a></li>
+        <li><a routerLink="/admin/messagerie" routerLinkActive="active"><mat-icon>chat</mat-icon> Messagerie</a></li>
+        <li><a routerLink="/admin/clients/liste" routerLinkActive="active"><mat-icon>group</mat-icon> Clients</a></li>
+        <li><a routerLink="/admin/services" routerLinkActive="active"><mat-icon>build</mat-icon> Services</a></li>
+        <li><a routerLink="/admin/temoignages" routerLinkActive="active"><mat-icon>reviews</mat-icon> Témoignages</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ==================== CONTENU ==================== -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- ==================== MODAL DÉCONNEXION ==================== -->
+<div
+  class="modal-backdrop"
+  *ngIf="showLogoutModal"
+  (click)="closeLogoutModal()"
+  aria-hidden="true"
+>
+  <div class="modal-conten" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="logoutTitle">
+    <button class="close-btn" (click)="closeLogoutModal()" aria-label="Fermer la fenêtre">✕</button>
+    <div class="modal-icon">🔒</div>
+    <h2 id="logoutTitle">Confirmer la déconnexion</h2>
+    <p>Voulez-vous vraiment vous déconnecter ?</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="closeLogoutModal()">Annuler</button>
+      <button class="btn-confirm" (click)="confirmLogout()">Se déconnecter</button>
+    </div>
+  </div>
+</div>
+
+</div>

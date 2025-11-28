@@ -1,0 +1,51 @@
+<div class="modal-container">
+  <h2 mat-dialog-title class="modal-title">
+    <mat-icon class="modal-icon">edit</mat-icon>
+    Modifier un projet
+    <button class="close-btn" (click)="onCancel()">×</button>
+  </h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+
+      <!-- Nom du service -->
+      <div class="form-group">
+        <label for="nom_service" class="form-label">Nom du service</label>
+        <input id="nom_service" type="text" formControlName="nom_service" class="form-control" placeholder="Entrez le nom du service">
+        <div class="form-error" *ngIf="serviceForm.get('nom_service')?.hasError('required')">
+          Le nom du service est requis
+        </div>
+        <div class="form-error" *ngIf="serviceForm.get('nom_service')?.hasError('minlength')">
+          Le nom doit contenir au moins 3 caractères
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description_service" class="form-label">Description</label>
+        <textarea id="description_service" formControlName="description_service" class="form-control" placeholder="Entrez la description du service"></textarea>
+        <div class="form-error" *ngIf="serviceForm.get('description_service')?.hasError('required')">
+          La description est requise
+        </div>
+        <div class="form-error" *ngIf="serviceForm.get('description_service')?.hasError('minlength')">
+          La description doit contenir au moins 10 caractères
+        </div>
+      </div>
+
+      <!-- Prix minimum -->
+      <div class="form-group">
+        <label for="prix_minimum" class="form-label">Prix minimum</label>
+        <input id="prix_minimum" type="number" formControlName="prix_minimum" class="form-control" placeholder="Entrez le prix minimum" min="0">
+        <div class="form-error" *ngIf="serviceForm.get('prix_minimum')?.hasError('required')">
+          Le prix minimum est requis
+        </div>
+      </div>
+
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Annuler</button>
+    <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="serviceForm.invalid">Enregistrer</button>
+  </mat-dialog-actions>
+</div>

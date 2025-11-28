@@ -1,0 +1,274 @@
+/* ===================================
+   ESPACE CLIENT - LISTE DES SERVICES
+   Charte Innov 2025 (#007C89 / #FFFFFF)
+   =================================== */
+
+.services-section {
+  /*padding: 20px 10px;*/
+  background: #f9fbfc;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* -------- Titre principal -------- */
+.section-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #007C89, #00A3B4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  animation: fadeInUp 1s ease-out;
+}
+
+/* -------- Cartes de service -------- */
+.services-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 500px));
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.service-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 35px 25px;
+  text-align: center;
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 20px rgba(0, 124, 137, 0.15);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 124, 137, 0.25);
+  border: 2px solid #007C89;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(90deg, #007C89, #00A3B4);
+  border-radius: 18px 18px 0 0;
+}
+
+/* -------- Icône -------- */
+.service-card .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: #007C89;
+  background: rgba(0, 124, 137, 0.1);
+  border-radius: 12px;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 18px;
+  transition: all 0.4s ease;
+}
+
+.service-card:hover .icon {
+  background: rgba(0, 124, 137, 0.2);
+  transform: scale(1.15) rotate(8deg);
+}
+
+/* -------- Titre & texte -------- */
+.service-card h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.service-card a.details-link {
+  color: #007C89;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.service-card a.details-link:hover {
+  text-decoration: underline;
+  color: #00A3B4;
+}
+
+/* -------- Modal -------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.modal-conten {
+  background: #ffffff;
+  border: 2px solid #007C89;
+  border-radius: 18px;
+  padding: 40px;
+  width: 550px;
+  max-width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 124, 137, 0.3);
+  animation: slideIn 0.3s ease-in-out;
+  text-align: center;
+  position: relative;
+}
+
+/* ----- Bouton fermer en haut ----- */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f4f7f8;
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+  color: #007C89;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.close-btn:hover {
+  background: #007C89;
+  color: #fff;
+}
+
+/* -------- Icône du modal -------- */
+.modal-icon {
+  font-size: 3rem;
+  color: #007C89;
+  margin-bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 124, 137, 0.1);
+  border-radius: 12px;
+  width: 70px;
+  height: 70px;
+}
+
+/* -------- Titre & description -------- */
+.modal-conten h2 {
+  color: #000;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.modal-conten .description {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* -------- Bouton d’action -------- */
+.modal-actions .btn-action {
+  background: linear-gradient(90deg, #007C89, #00A3B4);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 26px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 124, 137, 0.25);
+}
+
+.modal-actions .btn-action:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #00A3B4, #007C89);
+}
+
+/* -------- Pagination -------- */
+::ng-deep .pagination li.page-item a.page-link {
+  color: #007C89 !important;
+  border: 1px solid #007C89 !important;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+::ng-deep .pagination li.page-item.active a.page-link {
+  background-color: #007C89 !important;
+  color: #fff !important;
+  border-color: #007C89 !important;
+}
+
+::ng-deep .pagination li.page-item a.page-link:hover {
+  background-color: #00A3B4 !important;
+  color: white !important;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+/* -------- Animations -------- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-25px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 768px) {
+  .services-section {
+    padding: 30px 15px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .services-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    padding: 25px;
+    width: 90%;
+  }
+}
+
+.icon-web::before {
+  font-family: "Font Awesome 6 Free";
+  content: "\f109"; /* fa-laptop-code */
+  font-weight: 900;
+}
+
+.icon-mobile::before {
+  font-family: "Font Awesome 6 Free";
+  content: "\f3cd"; /* fa-mobile-alt */
+  font-weight: 900;
+}
+
+.icon-dev-web::before {
+  font-family: "Font Awesome 6 Free";
+  content: "\f121"; /* fa-code */
+  font-weight: 900;
+}
+

@@ -1,0 +1,180 @@
+/* 🌐 Style global du modal */
+.mat-mdc-dialog-container {
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  max-width: 480px;
+  width: 90%;
+  padding: 0;
+  animation: fadeIn 0.25s ease-in-out;
+  border: 1px solid #f2f2f2;
+}
+
+/* 🧭 Titre du modal */
+.mat-mdc-dialog-title {
+  color: #2e0f66;
+  font-weight: 600;
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 18px 20px;
+  border-bottom: 1px solid #e6e9ef;
+  background: linear-gradient(to right, #f9f9ff, #ffffff);
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  position: relative;
+}
+
+/* ❌ Bouton de fermeture */
+.close-btn {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 1.6rem;
+  color: #0077c8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.close-btn:hover {
+  color: #5dd35c;
+  transform: scale(1.1);
+}
+
+/* 🧾 Contenu du modal */
+mat-dialog-content {
+  padding: 25px 20px 10px 20px;
+  background: #ffffff;
+}
+
+/* Champs du formulaire */
+mat-form-field.w-100 {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+/* 🏷️ Label des champs */
+mat-label {
+  font-weight: 600;
+  color: #2e0f66;
+  font-size: 1.2rem;
+}
+
+/* Inputs, textarea, select */
+input[matInput],
+textarea[matInput],
+mat-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e0e6ed;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #333;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+input[matInput]:focus,
+textarea[matInput]:focus,
+mat-select:focus {
+  border-color: #0077c8;
+  box-shadow: 0 0 6px rgba(0, 119, 200, 0.25);
+}
+
+/* Sélecteurs */
+mat-option {
+  color: #2e0f66;
+}
+mat-option:hover {
+  background: #f4f6fa;
+}
+/* ⚙️ Pied du modal */
+mat-dialog-actions {
+  padding: 18px 22px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  border-top: 1px solid #e6e9ef;
+  background: #fafafa;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+/* Bouton Annuler — look doux et professionnel */
+button[mat-button] {
+  background: linear-gradient(145deg, #f1f3f6, #e9ecef);
+  color: #333;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 9px 20px;
+  border-radius: 8px;
+  border: 1px solid #d5d8dc;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+button[mat-button]:hover {
+  background: linear-gradient(145deg, #e4e7eb, #f1f3f6);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+button[mat-button]:active {
+  transform: scale(0.98);
+  box-shadow: none;
+}
+
+/* Bouton principal (Ajouter / Enregistrer) — style premium */
+button[mat-flat-button] {
+  background: linear-gradient(135deg, #2e0f66, #0077c8);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(46, 15, 102, 0.25);
+}
+button[mat-flat-button]:hover {
+  background: linear-gradient(135deg, #3a1485, #0090e2);
+  box-shadow: 0 5px 12px rgba(46, 15, 102, 0.35);
+  transform: translateY(-1px);
+}
+button[mat-flat-button]:active {
+  transform: scale(0.98);
+}
+button[mat-flat-button][disabled] {
+  background: #d1d1d1;
+  color: #777;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Animation d'apparition subtile */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 📱 Responsive mobile */
+@media (max-width: 600px) {
+  mat-dialog-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  button[mat-button],
+  button[mat-flat-button] {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+}

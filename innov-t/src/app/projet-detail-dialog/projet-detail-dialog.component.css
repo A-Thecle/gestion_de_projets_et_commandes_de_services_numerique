@@ -1,0 +1,95 @@
+/* ===== MODAL BACKDROP ===== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* ----- Contenu principal ----- */
+.modal-conten {
+  width: 420px;
+  max-width: 100%;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 12px 30px rgba(0, 124, 137, 0.25);
+  transform: translateY(-6px);
+  animation: modalPop 250ms ease-out forwards;
+  z-index: 3100;
+  border: 2px solid #007C89;
+}
+
+/* Animation d'apparition */
+@keyframes modalPop {
+  from { opacity: 0; transform: translateY(-15px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ----- Titres et textes ----- */
+.modal-conten h2 {
+  margin: 8px 0 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #007C89;
+}
+
+.modal-conten p {
+  margin: 0 0 15px;
+  color: #4b5a5f;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ----- Bouton fermer en haut ----- */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f4f7f8;
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+  color: #007C89;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.close-btn:hover {
+  background: #007C89;
+  color: #fff;
+}
+
+/* ----- Actions (boutons) ----- */
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+/* ----- Bouton fermer dans footer ----- */
+.btn-close {
+  background: linear-gradient(90deg,#007C89);
+  color: #fff;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-close:hover {
+  background: linear-gradient(90deg,  #0061a8);
+  box-shadow: 0 4px 10px rgba(0, 119, 200, 0.3);
+  transform: translateY(-1px);
+}

@@ -1,0 +1,211 @@
+<div *ngIf="loading" class="loading">
+  <span class="loading-spinner"></span> Chargement des projets...
+</div>
+
+<div class="projets-container" *ngIf="!loading">
+  <!-- Colonne 1 : Projets en attente -->
+  <div class="projet-column" *ngIf="projetsEnAttente.length > 0">
+    <h2 class="column-title">Vos projets en attente</h2>
+    <div class="projets-cards">
+      <div class="projet-card" *ngFor="let projet of projetsEnAttente | paginate: { id: 'enAttente', itemsPerPage: 1, currentPage: currentPageEnAttente }">
+        <div class="card-header">
+          <button class="details-btn" (click)="openDetails(projet)">Voir détails</button>
+          <span class="statut">{{ projet.etat }}</span>
+        </div>
+        <div class="card-body">
+          <p><strong>Titre :</strong> {{ projet.titre_projet }}</p>
+         <p><strong>Description :</strong>
+  {{ projet.description_projet 
+      ? (projet.description_projet.length > 20
+          ? (projet.description_projet | slice:0:20) + '...' 
+          : projet.description_projet)
+      : 'Aucune description disponible.' }}
+  
+  <a
+    *ngIf="projet.description_projet && projet.description_projet.length > 20" 
+    class="details-link"
+    (click)="openDescriptionModal($event, projet)">
+    Voir plus
+  </a>
+</p>
+          <p *ngIf="projet.commande"><strong>Commande :</strong> {{ projet.commande.commandes_id }}</p>
+          <p><strong>Date de livraison :</strong> {{ projet.date_livraison_prevue | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination-container d-flex justify-content-center mt-4">
+      <pagination-controls
+        id="enAttente"
+        (pageChange)="currentPageEnAttente = $event"
+        previousLabel="« Précédent"
+        nextLabel="Suivant »"
+        [autoHide]="false"
+        [responsive]="true"
+        [maxSize]="5"
+        [directionLinks]="true"
+        screenReaderPaginationLabel="Page"
+        screenReaderCurrentLabel="de {{currentPageEnAttente}}"
+      ></pagination-controls>
+    </div>
+  </div>
+
+  <!-- Colonne 2 : Projets en cours -->
+  <div class="projet-column" *ngIf="projetsEnCours.length > 0">
+    <h2 class="column-title">Vos projets en cours</h2>
+    <div class="projets-cards">
+      <div class="projet-card" *ngFor="let projet of projetsEnCours | paginate: { id: 'enCours', itemsPerPage: 1, currentPage: currentPageEnCours }">
+        <div class="card-header">
+          <button class="details-btn" (click)="openDetails(projet)">Voir détails</button>
+          <span class="statut">{{ projet.etat }}</span>
+        </div>
+        <div class="card-body">
+          <p><strong>Titre :</strong> {{ projet.titre_projet }}</p>
+  <p><strong>Description :</strong>
+  {{ projet.description_projet 
+      ? (projet.description_projet.length > 20
+          ? (projet.description_projet | slice:0:20) + '...' 
+          : projet.description_projet)
+      : 'Aucune description disponible.' }}
+  
+  <a
+    *ngIf="projet.description_projet && projet.description_projet.length > 20" 
+    class="details-link"
+    (click)="openDescriptionModal($event, projet)">
+    Voir plus
+  </a>
+</p>
+
+
+
+          <p *ngIf="projet.commande"><strong>Commande :</strong> {{ projet.commande.commandes_id }}</p>
+          <p><strong>Date de livraison :</strong> {{ projet.date_livraison_prevue | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination-container d-flex justify-content-center mt-4">
+      <pagination-controls
+        id="enCours"
+        (pageChange)="currentPageEnCours = $event; logPageChange('enCours', $event)"
+        previousLabel="« Précédent"
+        nextLabel="Suivant »"
+        [autoHide]="false"
+        [responsive]="true"
+        [maxSize]="5"
+        [directionLinks]="true"
+        screenReaderPaginationLabel="Page"
+        screenReaderCurrentLabel="de {{currentPageEnCours}}"
+      ></pagination-controls>
+    </div>
+  </div>
+
+  <!-- Colonne 3 : Projets en révision -->
+  <div class="projet-column" *ngIf="projetsEnRevision.length > 0">
+    <h2 class="column-title">Vos projets en révision</h2>
+    <div class="projets-cards">
+      <div class="projet-card" *ngFor="let projet of projetsEnRevision | paginate: { id: 'enRevision', itemsPerPage: 1, currentPage: currentPageEnRevision }">
+        <div class="card-header">
+          <button class="details-btn" (click)="openDetails(projet)">Voir détails</button>
+          <span class="statut">{{ projet.etat }}</span>
+        </div>
+        <div class="card-body">
+          <p><strong>Titre :</strong> {{ projet.titre_projet }}</p>
+        <p><strong>Description :</strong>
+  {{ projet.description_projet 
+      ? (projet.description_projet.length > 20
+          ? (projet.description_projet | slice:0:20) + '...' 
+          : projet.description_projet)
+      : 'Aucune description disponible.' }}
+  
+  <a
+    *ngIf="projet.description_projet && projet.description_projet.length > 20" 
+    class="details-link"
+    (click)="openDescriptionModal($event, projet)">
+    Voir plus
+  </a>
+</p>
+          <p *ngIf="projet.commande"><strong>Commande :</strong> {{ projet.commande.commandes_id }}</p>
+          <p><strong>Date de livraison :</strong> {{ projet.date_livraison_prevue | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination-container d-flex justify-content-center mt-4">
+      <pagination-controls
+        id="enRevision"
+        (pageChange)="currentPageEnRevision = $event"
+        previousLabel="« Précédent"
+        nextLabel="Suivant »"
+        [autoHide]="false"
+        [responsive]="true"
+        [maxSize]="5"
+        [directionLinks]="true"
+        screenReaderPaginationLabel="Page"
+        screenReaderCurrentLabel="de {{currentPageEnRevision}}"
+      ></pagination-controls>
+    </div>
+  </div>
+
+  <!-- Colonne 4 : Projets terminés -->
+  <div class="projet-column" *ngIf="projetsTermines.length > 0">
+    <h2 class="column-title">Vos projets terminés</h2>
+    <div class="projets-cards">
+      <div class="projet-card" *ngFor="let projet of projetsTermines | paginate: { id: 'termines', itemsPerPage: 1, currentPage: currentPageTermines }">
+        <div class="card-header">
+          <button class="details-btn" (click)="openDetails(projet)">Voir détails</button>
+          <span class="statut">{{ projet.etat }}</span>
+        </div>
+        <div class="card-body">
+          <p><strong>Titre :</strong> {{ projet.titre_projet }}</p>
+         <p><strong>Description :</strong>
+  {{ projet.description_projet 
+      ? (projet.description_projet.length > 20
+          ? (projet.description_projet | slice:0:20) + '...' 
+          : projet.description_projet)
+      : 'Aucune description disponible.' }}
+  
+  <a
+    *ngIf="projet.description_projet && projet.description_projet.length > 20" 
+    class="details-link"
+    (click)="openDescriptionModal($event, projet)">
+    Voir plus
+  </a>
+</p>
+          <p *ngIf="projet.commande"><strong>Commande :</strong> {{ projet.commande.commandes_id }}</p>
+          <p><strong>Date de livraison :</strong> {{ projet.date_livraison_prevue | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination-container d-flex justify-content-center mt-4">
+      <pagination-controls
+        id="termines"
+        (pageChange)="currentPageTermines = $event"
+        previousLabel="« Précédent"
+        nextLabel="Suivant »"
+        [autoHide]="false"
+        [responsive]="true"
+        [maxSize]="5"
+        [directionLinks]="true"
+        screenReaderPaginationLabel="Page"
+        screenReaderCurrentLabel="de {{currentPageTermines}}"
+      ></pagination-controls>
+    </div>
+  </div>
+
+  <!-- Message global si aucune colonne n'est affichée -->
+  <div *ngIf="projetsEnAttente.length === 0 && projetsEnCours.length === 0 && projetsEnRevision.length === 0 && projetsTermines.length === 0" class="no-projets-global">
+    Aucun projet trouvé pour votre compte.
+  </div>
+
+  <!-- Modal for Full Description -->
+  <div class="modal-backdrop" *ngIf="selectedDescription">
+  <div class="modal-conten">
+    <button class="close-btn" (click)="closeDescriptionModal()">✕</button>
+    <h2>Description Complète</h2>
+    <p class="description">{{ selectedDescription }}</p>
+  </div>
+</div>
+
+</div>

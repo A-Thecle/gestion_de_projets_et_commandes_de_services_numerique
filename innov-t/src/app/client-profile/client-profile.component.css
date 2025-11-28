@@ -1,0 +1,237 @@
+/* ========================================================= */
+/*                  STYLE PROFIL COMPLET AMÉLIORÉ           */
+/* ========================================================= */
+
+/* Conteneur principal */
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #f8fcfd;
+  font-family: 'Poppins', sans-serif;
+
+  min-height: 100vh;
+}
+
+/* Titre principal */
+.profile-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  color: #007C89 !important;
+}
+.profile-title span {
+  position: relative;
+}
+.profile-title span::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 5px;
+  background: linear-gradient(90deg, #007C89, #00d4bd);
+  border-radius: 3px;
+}
+
+/* ========================================================= */
+/*            REMPLACEMENT TOTAL DU FOND GRIS MDC          */
+/* ========================================================= */
+
+.mat-mdc-form-field {
+  --mdc-filled-text-field-container-color: transparent !important;
+  --mdc-filled-text-field-input-text-color: #333 !important;
+  width: 100% !important;
+  
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-flex {
+  background: transparent !important;
+  border-radius: 12px !important;
+  border: 2px solid #d0e8ec !important;
+  transition: all 0.3s ease;
+  padding: 0 12px !important;
+}
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-flex {
+  border-color: #007C89 !important;
+  box-shadow: 0 0 0 4px rgba(0, 124, 137, 0.15) !important;
+  background: rgba(0, 124, 137, 0.03) !important;
+}
+.mat-mdc-form-field .mat-mdc-floating-label {
+  color: #555 !important;
+  font-weight: 500;
+}
+.mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
+  color: #007C89 !important;
+}
+.mat-mdc-input-element {
+  color: #333 !important;
+  font-size: 1rem;
+  caret-color: #007C89;
+}
+.mat-mdc-form-field .mat-mdc-form-field-underline {
+  display: none !important;
+}
+.mat-mdc-form-field .mat-mdc-form-field-error {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  padding-top: 4px;
+}
+.mat-mdc-form-field input[readonly] {
+  color: #007C89 !important;
+  font-weight: 600;
+  background: rgba(0, 124, 137, 0.05);
+  border-radius: 10px;
+}
+
+/* ========================================================= */
+/*                     GRILLE & CARTES                       */
+/* ========================================================= */
+
+.profile-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.profile-section-title {
+  font-size: 1.1rem;      /* Taille du titre principal */
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #007C89;
+  margin-bottom: 15px;
+}
+
+.profile-section-title .info-subtitle {
+  font-size: 0.85rem;     /* Taille plus petite pour le texte secondaire */
+  font-weight: 400;       /* Plus léger */
+  color: #555;
+  margin-left: 6px;
+  white-space: nowrap;    /* Pour rester sur la même ligne */
+}
+h2{
+   font-size: 1.1rem;      /* Taille du titre principal */
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #007C89;
+  margin-bottom: 15px;
+}
+
+/* Boutons */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 10px;
+}
+.btn-cancel {
+  background: #f8fbfc;
+  color: #555;
+  padding: 11px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: 2px solid #d0e8ec;
+  transition: all 0.3s ease;
+}
+.btn-cancel:hover {
+  background: #e6f4f7;
+  border-color: #007C89;
+  color: #007C89;
+  transform: translateY(-2px);
+}
+.btn-submit {
+  background: linear-gradient(135deg, #007C89, #00a499);
+  color: white;
+  padding: 11px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 124, 137, 0.3);
+  transition: all 0.3s ease;
+}
+.btn-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #006d7a, #009688);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 124, 137, 0.4);
+}
+.btn-submit:disabled {
+  background: #b0bec5;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Cartes commandes & projets */
+.commande-card,
+.projet-card {
+  background: linear-gradient(135deg, #f5fbfd, #edf9fc);
+  border-left: 4px solid #007C89;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+.commande-card:hover,
+.projet-card:hover {
+  transform: translateX(6px);
+  box-shadow: 0 8px 20px rgba(0, 124, 137, 0.15);
+}
+
+.no-data {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  padding: 20px;
+  background: #f9fcfd;
+  border-radius: 10px;
+  border: 1px dashed #cce8ef;
+}
+
+/* ========================================================= */
+/*   CONTENEUR COMMANDES & PROJETS – UNE CARTE VISIBLE      */
+/* ========================================================= */
+
+.commandes-list,
+.projets-list {
+  max-height: 150px; /* hauteur d'une seule card visible */
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding-right: 6px;
+}
+
+.commandes-list::-webkit-scrollbar,
+.projets-list::-webkit-scrollbar {
+  width: 6px;
+}
+.commandes-list::-webkit-scrollbar-track,
+.projets-list::-webkit-scrollbar-track {
+  background: #f0f8fb;
+  border-radius: 10px;
+}
+.commandes-list::-webkit-scrollbar-thumb,
+.projets-list::-webkit-scrollbar-thumb {
+  background: #007C89;
+  border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 868px) {
+  .profile-content {
+    grid-template-columns: 1fr;
+  }
+  .profile-title {
+    font-size: 1.9rem;
+  }
+}
+mat-label {
+  font-weight: bold;
+  font-size: 1.2rem;
+}

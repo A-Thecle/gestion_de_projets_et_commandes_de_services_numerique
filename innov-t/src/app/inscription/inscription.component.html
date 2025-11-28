@@ -1,0 +1,162 @@
+<div class="inscription-wrapper">
+
+  <!-- === COLONNE GAUCHE : IMAGE (50%) === -->
+<div class="inscription-image">
+  <img src="assets/code2.jpeg" alt="Rejoignez INNOV-T" class="side-image">
+
+  <div class="image-overlay">
+    <!-- Message motivant -->
+    <div class="quote">
+      <h3>« Rejoignez INNOV-T »</h3>
+      <p>Inscrivez-vous et accédez à nos solutions numériques innovantes.</p>
+    </div>
+
+    <!-- Avantages / Points clés -->
+    <div class="advantages">
+      <ul>
+        <li><strong>Inscription rapide :</strong> Moins de 2 minutes.</li>
+        <li><strong>Solutions innovantes :</strong> Web et mobile.</li>
+        <li><strong>Soutien expert :</strong> À chaque étape.</li>
+      </ul>
+    </div>
+
+    <!-- Logo & branding -->
+    <div class="brand">
+      <img src="assets/innov.jpg" alt="Logo" class="brand-logo">
+      <span>INNOV-T MADAGASCAR</span>
+    </div>
+  </div>
+</div>
+
+
+  <!-- === COLONNE DROITE : FORMULAIRE (50%) === -->
+  <div class="inscription-form-container">
+    <div class="inscription-container enhanced">
+
+      <h2 class="title">Créer votre compte</h2>
+
+      <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+
+        <!-- Feedback global -->
+        <div *ngIf="formSubmitted && registerForm.invalid" class="alert-error">
+          Veuillez remplir tous les champs obligatoires correctement.
+        </div>
+
+        <!-- Ligne 1 : Nom + Prénom -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <div class="input-wrapper">
+              <input type="text" id="nom" formControlName="nom" placeholder="Entrez votre nom"
+                     [class.is-invalid]="registerForm.get('nom')?.invalid && registerForm.get('nom')?.touched">
+             <span class="icon">👤</span>
+            </div>
+            <div *ngIf="registerForm.get('nom')?.invalid && registerForm.get('nom')?.touched" class="invalid-feedback">
+              Veuillez entrer votre nom.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="prenom">Prénom</label>
+            <div class="input-wrapper">
+              <input type="text" id="prenom" formControlName="prenom" placeholder="Entrez votre prénom"
+                     [class.is-invalid]="registerForm.get('prenom')?.invalid && registerForm.get('prenom')?.touched">
+             <span class="icon">👤</span>
+            </div>
+            <div *ngIf="registerForm.get('prenom')?.invalid && registerForm.get('prenom')?.touched" class="invalid-feedback">
+              Veuillez entrer votre prénom.
+            </div>
+          </div>
+        </div>
+
+        <!-- Ligne 2 : Email + Téléphone -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-wrapper">
+              <input type="email" id="email" formControlName="email" placeholder="exemple@email.com"
+                     [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+             <span class="icon">📧</span>
+            </div>
+            <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="invalid-feedback">
+              Veuillez entrer un email valide.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="telephone">Téléphone</label>
+            <div class="phone-input">
+              <select formControlName="prefix" class="phone-prefix">
+                <option value="+261">+261</option>
+                <option value="+33">+33</option>
+                <option value="+1">+1</option>
+              </select>
+              <div class="input-wrapper">
+                <input type="text" id="telephone" formControlName="telephone"
+                       placeholder="00 00 000 00" (input)="formatPhoneNumber()"
+                       [class.is-invalid]="registerForm.get('telephone')?.invalid && registerForm.get('telephone')?.touched">
+                   <span class="icon">📱</span>
+              </div>
+            </div>
+            <div *ngIf="registerForm.get('telephone')?.invalid && registerForm.get('telephone')?.touched" class="invalid-feedback">
+              Numéro invalide.
+            </div>
+          </div>
+        </div>
+
+        <!-- Ligne 3 : Mot de passe + Confirmation -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="mot_de_passe">Mot de passe</label>
+            <div class="input-wrapper">
+              <input [type]="showPassword ? 'text' : 'password'" id="mot_de_passe"
+                     formControlName="mot_de_passe" placeholder="••••••••"
+                     [class.is-invalid]="registerForm.get('mot_de_passe')?.invalid && registerForm.get('mot_de_passe')?.touched">
+              <a class="icon eye-icon" (click)="togglePasswordVisibility('password')">
+                {{ showPassword ? '🙈' : '👁️' }}
+              </a>
+            </div>
+            <div *ngIf="registerForm.get('mot_de_passe')?.hasError('minlength') && registerForm.get('mot_de_passe')?.touched"
+                 class="invalid-feedback">
+              Minimum 6 caractères.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmer_mot_de_passe">Confirmer</label>
+            <div class="input-wrapper">
+              <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirmer_mot_de_passe"
+                     formControlName="confirmer_mot_de_passe" placeholder="••••••••"
+                     [class.is-invalid]="registerForm.hasError('passwordMismatch')">
+              <a class="icon eye-icon" (click)="togglePasswordVisibility('confirm')">
+                 {{ showPassword ? '🙈' : '👁️' }}
+              </a>
+            </div>
+            <div *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('confirmer_mot_de_passe')?.touched"
+                 class="invalid-feedback">
+              Les mots de passe ne correspondent pas.
+            </div>
+          </div>
+        </div>
+
+        <!-- Boutons -->
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" (click)="resetForm(registerForm)">Annuler</button>
+          <button type="submit" class="btn-submit" [disabled]="registerForm.invalid">S'inscrire</button>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert-error">{{ errorMessage }}</div>
+      </form>
+
+      <!-- Modal succès -->
+      <div class="confirmation-modal" *ngIf="showSuccessModal">
+        <div class="modal-content">
+          <h3>Inscription réussie !</h3>
+          <p>Merci {{ registerForm.value.prenom }} ! Vous pouvez maintenant vous connecter.</p>
+          <button (click)="closeSuccessModal()">OK</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

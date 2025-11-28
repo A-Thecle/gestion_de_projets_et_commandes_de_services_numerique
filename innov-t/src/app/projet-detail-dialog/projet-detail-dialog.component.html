@@ -1,0 +1,25 @@
+<div class="modal-backdrop" *ngIf="data">
+  <div class="modal-conten">
+    <!-- Bouton fermer -->
+    <button class="close-btn" (click)="close()">✕</button>
+
+    <!-- Contenu -->
+    <h2>Détails du projet</h2>
+
+    <p><strong>Titre :</strong> {{ data.titre_projet }}</p>
+    <p><strong>Description :</strong> {{ data.description_projet }}</p>
+    <p><strong>Date d'échéance :</strong> {{ data.date_livraison_prevue | date:'dd/MM/yyyy' }}</p>
+    <p *ngIf="data.commande && data.commande.montant_estime != null">
+  <strong>Prix estimé :</strong> {{ data.commande.montant_estime }} Ar
+</p>
+<p *ngIf="!data.commande || data.commande.montant_estime == null">
+  <strong>Prix estimé :</strong> 
+</p>
+
+
+    <!-- Boutons si nécessaire -->
+    <div class="modal-actions">
+      <button class="btn-close" (click)="close()">Fermer</button>
+    </div>
+  </div>
+</div>

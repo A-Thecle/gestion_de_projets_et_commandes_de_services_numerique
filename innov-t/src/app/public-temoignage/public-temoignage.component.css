@@ -1,0 +1,219 @@
+/* ============================ */
+/* === Conteneur principal === */
+.temoignages-container {
+  /*padding: 30px 20px;*/
+  background-color: #f8fafc;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+/* === Titre === */
+.temoignages-container h2 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #007C89);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: none;
+}
+
+/* === Ligne de témoignages === */
+.testimonials-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* === Carte de témoignage === */
+/* === Carte de témoignage === */
+.testimonial-card {
+  flex: 1 1 calc(33.333% - 20px); /* 3 cartes par ligne */
+  max-width: 400px;
+  background: #fff;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+
+  /* === Animation à l'entrée === */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUpFade 0.5s forwards;
+  animation-delay: 0.1s;
+}
+.testimonial-card:hover {
+     background: #ffffff;
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 124, 137, 0.25);
+}
+
+/* === Animation slideUpFade === */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Header de la carte === */
+.testimonial-header {
+ display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* === Avatar === */
+.avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #007C89);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* === Info client === */
+.client-info strong {
+ 
+  color: #000000;
+  font-size: 1rem;
+}
+
+/* === Note === */
+.rating {
+  display: flex;
+  gap: 2px;
+  font-size: 1rem;
+  color: #007C89;
+}
+
+/* === Commentaire === */
+.comment {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.5;
+  text-align: justify;
+  background: #e0f7f9; /* léger bleu pastel */
+  border-left: 4px solid #007C89;
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+
+/* === Meta (date / projet) === */
+.meta {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  font-weight: 600px;
+}
+
+.meta .date,
+.meta .project-title {
+  white-space: nowrap;
+}
+
+.meta .project-title {
+ 
+  color: #333;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+/* === Séparateur === */
+.separator {
+  border: none;
+  border-top: 1px dashed #2E0F66;
+  width: 80%;
+  margin: 20px auto;
+}
+
+/* === Bouton ajouter témoignage === */
+.add-testimonial {
+  background-color: #5DD35C;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 20px auto 0;
+  font-weight: bold;
+  display: block;
+}
+.add-testimonial:hover {
+  background-color: #4AB54A;
+}
+
+/* === Modal de confirmation === */
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.confirmation-modal .modal-content {
+  background: linear-gradient(90deg, #5DD35C, #0077C8, #2E0F66);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.confirmation-modal .btn-close {
+  background-color: white;
+  color: #2E0F66;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.confirmation-modal .btn-close:hover {
+  background-color: #5DD35C;
+  color: white;
+}
+
+/* === Animation fadeIn === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* === Responsive === */
+@media (max-width: 900px) {
+  .testimonial-card { flex: 1 1 calc(50% - 20px); }
+}
+@media (max-width: 600px) {
+  .testimonial-card { flex: 1 1 100%; }
+}

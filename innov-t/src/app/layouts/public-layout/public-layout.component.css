@@ -1,0 +1,188 @@
+/* ===================== CHARTE GRAPHIQUE ===================== */
+:root {
+  --primary: #007C89;
+  --primary-light: #00A3B3;
+  --white: #ffffff;
+  --text-dark: #2c2c2c;
+  --gray: #e8edf0;
+}
+
+/* ===================== STRUCTURE ===================== */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background: #f7fbfc;
+  color:#2c2c2c;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px 20px;
+}
+
+/* ===================== NAVBAR ===================== */
+.navbar {
+  background: white;
+  box-shadow: 0 3px 10px rgba(0, 124, 137, 0.1);
+  border-bottom: 3px solid #007C89;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  flex-wrap: wrap;
+}
+
+/* Logo */
+.navbar-left {
+  display: flex;
+  align-items: center;        /* ← LIGNE MAGIQUE */
+  gap: 12px;
+  height: 100%;
+}
+.logo-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  border: 2px solid #007C89;
+}
+
+.logo-text {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #007C89;
+  letter-spacing: 1px;
+  
+}
+/* ================== NAVBAR CENTER - PRO 2025 ================== */
+/* ================== NAVBAR CENTER - PRO 2025 ================== */
+.navbar-center {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center; /* centre les éléments */
+}
+
+.navbar-center a {
+  color: #2c2c2c;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  position: relative;
+  padding: 8px 0;
+  transition: all 0.35s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* espace entre l’icône et le texte */
+}
+
+/* Soulignement qui glisse */
+.navbar-center a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: #007C89; /* couleur soulignement active */
+  border-radius: 2px;
+  transition: all 0.35s ease;
+  transform: translateX(-50%);
+}
+
+/* Hover + Page active */
+.navbar-center a:hover,
+.navbar-center a.active {
+  color: #007C89; /* couleur texte active */
+  transform: translateY(-2px); /* léger soulèvement */
+}
+
+.navbar-center a:hover::after,
+.navbar-center a.active::after {
+  width: 100%;
+}
+
+/* Effet supplémentaire sur hover */
+.navbar-center a:hover {
+  transform: translateY(-2px);
+}
+.navbar-center a mat-icon {
+  font-size: 22px;
+  color: #007C89;
+}
+
+/* Bouton connexion */
+.btn-login {
+  background: #007C89;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 3px 8px rgba(0, 124, 137, 0.25);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-login:hover {
+  background: #00A3B3;
+  transform: translateY(-2px);
+}
+
+/* ===================== FOOTER ===================== */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #007C89;
+  color: white;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 -3px 10px rgba(0, 124, 137, 0.1);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 992px) {
+  .navbar-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  .navbar-center {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .navbar-right {
+    width: 100%;
+  }
+
+  .btn-login {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 1.1rem;
+  }
+
+  .navbar-center a {
+    font-size: 0.9rem;
+  }
+}

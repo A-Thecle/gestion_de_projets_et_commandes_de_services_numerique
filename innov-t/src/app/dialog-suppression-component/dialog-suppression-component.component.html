@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Supprimer le message</h2>
+
+<mat-dialog-content>
+  <p>Voulez-vous vraiment supprimer ce message ?</p>
+
+  <p *ngIf="!data.isExpediteur" class="note">
+    Vous pouvez uniquement supprimer le message pour vous-même.
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="annuler()">Annuler</button>
+
+  <button mat-button (click)="supprimerPourMoi()">
+    Supprimer pour moi
+  </button>
+
+  <button mat-button color="warn" *ngIf="data.isExpediteur" (click)="supprimerPourTous()">
+    Supprimer pour tout le monde
+  </button>
+</mat-dialog-actions>

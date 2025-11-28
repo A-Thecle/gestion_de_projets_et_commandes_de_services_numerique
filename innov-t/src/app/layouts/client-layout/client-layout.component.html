@@ -1,0 +1,133 @@
+ <div class="body">
+<div class="client-layout">
+ <header class="header">
+  <div class="header-left">
+    <img src="assets/innov.jpg" alt="Logo InnovT" class="logo-img" />
+    <h1 class="logo-text">INNOV-T MADAGASCAR</h1>
+  </div>
+
+  <div class="header-right">
+   
+
+    <!-- ICONES + DÉCONNEXION -->
+    <div class="icon-group">
+      <button mat-icon-button (click)="toggleNotifications()" class="icon-btn" matTooltip="Notifications">
+        <mat-icon>notifications</mat-icon>
+        <span class="badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+      </button>
+  <!-- Notification Panel -->
+<div class="notifications-panel" *ngIf="showNotifications">
+  <ul>
+    <li *ngFor="let notif of notifications" (click)="markAsRead(notif.id)" [class.unread]="!notif.isRead">
+      <div class="notif-card">
+        <div class="notif-message">{{ notif.message }}</div>
+        <div class="notif-date">{{ notif.createdAt | date:'short' }}</div>
+      </div>
+    </li>
+    <li *ngIf="notifications.length === 0" class="empty">Aucune notification</li>
+  </ul>
+</div>
+
+
+      <button mat-icon-button routerLink="/client/messagerie" class="icon-btn" matTooltip="Messagerie">
+        <mat-icon>mail</mat-icon>
+        <span class="badge" *ngIf="compteMessagesNonLus > 0">{{ compteMessagesNonLus }}</span>
+      </button>
+
+      <button mat-button (click)="openLogoutModal()" class="logout-btn">
+        <mat-icon style="color: white;">logout</mat-icon>
+        <span style="color: white;">Déconnexion</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<aside class="sidebar">
+  <ul>
+    <li>
+      <a routerLink="/client/home" routerLinkActive="active">
+        <mat-icon>home</mat-icon>
+        Accueil
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/client/services" routerLinkActive="active">
+        <mat-icon>build</mat-icon>
+        Listes des services
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/client/demande" routerLinkActive="active">
+        <mat-icon>shopping_cart</mat-icon>
+        Demande de service
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/client/vos_projets" routerLinkActive="active">
+        <mat-icon>work</mat-icon>
+        Mes projets
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/client/mon_profil" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+        Mon profil
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/client/messagerie" routerLinkActive="active">
+        <mat-icon>chat</mat-icon>
+        Messagerie
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/client/temoignage" routerLinkActive="active">
+        <mat-icon>reviews</mat-icon>
+        Témoignages
+      </a>
+    </li>
+  </ul>
+</aside>
+
+
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+  
+
+  <!-- Modal de confirmation de déconnexion -->
+  <div
+    class="modal-backdrop"
+    *ngIf="showLogoutModal"
+    role="dialog"
+    aria-labelledby="logout-modal-title"
+  >
+    <div class="modal-conten">
+      <button
+        class="close-btn"
+        (click)="closeLogoutModal()"
+        aria-label="Fermer le modal"
+      >
+        ✕
+      </button>
+       <div class="modal-icon">🔒</div>
+      <h2 id="logout-modal-title">Confirmer la déconnexion</h2>
+      <p class="description">Voulez-vous vraiment vous déconnecter ?</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" (click)="closeLogoutModal()">Annuler</button>
+        <button class="btn-confirm" (click)="confirmLogout()">Confirmer</button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+</div>

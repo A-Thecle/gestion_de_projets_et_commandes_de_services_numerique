@@ -23,18 +23,25 @@ export class AuthService {
         where: { email: cleanedInput.toLowerCase() },
       });
     } else {
-      const phoneNumber = Number(cleanedInput);
-      if (!isNaN(phoneNumber)) {
-        utilisateur = await this.utilisateurRepo.findOne({
-          where: { telephone: phoneNumber },
-        });
-      }
+     const phoneNumber = cleanedInput; // garder en string
+utilisateur = await this.utilisateurRepo.findOne({
+  where: { telephone: phoneNumber },
+});
+
     }
 
-    if (!utilisateur || !(await bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe))) {
-      console.error('❌ Identifiants invalides:', { emailOrPhone, cleanedInput });
-      throw new UnauthorizedException('Identifiants invalides');
-    }
+  if (!utilisateur) {
+  console.error('❌ Email ou téléphone non trouvé :', emailOrPhone);
+  throw new UnauthorizedException('EMAIL_OR_PHONE_NOT_FOUND');
+}
+
+const passwordValid = await bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe);
+
+if (!passwordValid) {
+  console.error('❌ Mot de passe incorrect pour :', emailOrPhone);
+  throw new UnauthorizedException('INVALID_PASSWORD');
+}
+
 
     const payload = { id: utilisateur.id, email: utilisateur.email, role: utilisateur.role };
     console.log('✅ Génération du token avec payload:', payload);

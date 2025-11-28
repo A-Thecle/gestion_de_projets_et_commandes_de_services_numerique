@@ -1,0 +1,105 @@
+<div class="login-wrapper">
+
+  <!-- IMAGE DE GAUCHE -->
+<!-- IMAGE DE GAUCHE -->
+<div class="login-image">
+  <img src="assets/code2.jpeg" alt="INNOV-T Madagascar" class="side-image">
+  
+  <div class="image-overlay">
+    <!-- Message inspirant / Professionnel -->
+    <div class="quote">
+      <h3>«Vos idées, nos solutions »</h3>
+      <p>— INNOV-T Madagascar</p>
+    </div>
+
+    <!-- Points clés / Valeurs -->
+    <div class="values">
+      <ul>
+        <li><strong>Innovation :</strong> Solutions adaptées.</li>
+        <li><strong>Expertise :</strong> Web & mobile de qualité.</li>
+        <li><strong>Collaboration :</strong> Partenariat efficace.</li>
+      </ul>
+    </div>
+
+    <!-- Logo & Nom de la société -->
+    <div class="brand">
+      <img src="assets/innov.jpg" alt="Logo" class="brand-logo">
+      <span>INNOV-T MADAGASCAR</span>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- FORMULAIRE DE DROITE -->
+  <div class="login-form-container">
+    <div class="login-container enhanced">
+
+      <h2 class="title">Connexion</h2>
+
+      <!-- Erreur globale -->
+      <!-- Erreur globale -->
+  <div *ngIf="loginForm.invalid && (loginForm.get('emailOrPhone')?.touched && loginForm.get('mot_de_passe')?.touched)" class="alert-error">
+      ⚠ Veuillez remplir tous les champs correctement.
+    </div>
+
+
+      <form [formGroup]="loginForm" (ngSubmit)="verifyLogin()">
+
+        <!-- Email -->
+        <div class="form-group email">
+          <label for="emailOrPhone">Email</label>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              id="emailOrPhone"
+              formControlName="emailOrPhone"
+              placeholder="Entrez votre email"
+              [class.is-invalid]="loginForm.get('emailOrPhone')?.invalid && loginForm.get('emailOrPhone')?.touched"
+            >
+            <span class="icon">📧</span>
+          </div>
+          <div *ngIf="loginForm.get('emailOrPhone')?.invalid && loginForm.get('emailOrPhone')?.touched"
+               class="invalid-feedback">
+            Ce champ est obligatoire.
+          </div>
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="form-group password">
+          <label for="mot_de_passe">Mot de passe</label>
+          <div class="input-wrapper">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="mot_de_passe"
+              formControlName="mot_de_passe"
+              placeholder="Votre mot de passe"
+              [class.is-invalid]="loginForm.get('mot_de_passe')?.invalid && loginForm.get('mot_de_passe')?.touched"
+            >
+            <a class="icon eye-icon" (click)="togglePasswordVisibility()">
+              {{ showPassword ? '🙈' : '👁️' }}
+            </a>
+          </div>
+          <div *ngIf="loginForm.get('mot_de_passe')?.invalid && loginForm.get('mot_de_passe')?.touched"
+               class="invalid-feedback">
+            {{ loginForm.get('mot_de_passe')?.hasError('required') 
+                ? 'Le mot de passe est obligatoire.' 
+                : 'Minimum 6 caractères.' }}
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" [disabled]="loginForm.invalid">
+          Connexion
+        </button>
+
+        <div *ngIf="errorMessage" class="alert-error">{{ errorMessage }}</div>
+
+      </form>
+
+      <div class="register-link-container">
+        Vous n'avez pas de compte ? <a routerLink="/inscription">S'inscrire</a>
+      </div>
+
+    </div>
+  </div>
+</div>

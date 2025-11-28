@@ -1,0 +1,119 @@
+<div class="messagerie-conteneur">
+  <!-- Liste des projets -->
+  <div class="liste-projets">
+    <h3 class="projets-titre">Tous les Projets</h3>
+    <ul>
+      <li *ngFor="let projet of projets"
+          (click)="selectionnerProjet(projet)"
+          class="projet-item"
+          [ngClass]="{'projet-selectionne': projetSelectionne?.projet_id === projet.projet_id}">
+        {{ projet.titre_projet }} 
+        
+        <span *ngIf="projet.nonLus > 0" class="badge-nonlus">
+          {{ projet.nonLus }}
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Fenêtre de chat -->
+  <div class="fenetre-chat" *ngIf="projetSelectionne">
+    <div class="chat-header">
+  <div class="header-left">
+    <!-- Icône du projet -->
+    <div class="project-avatar">
+      <mat-icon>folder_open</mat-icon>
+    </div>
+
+    <div class="project-infos">
+      <h3 class="project-title">{{ projetSelectionne.titre_projet }}</h3>
+      <span class="project-status" [ngClass]="projetSelectionne.etat">
+        ● {{ projetSelectionne.etat }}
+      </span>
+    </div>
+  </div>
+
+  <div class="header-actions">
+    <button mat-icon-button matTooltip="Informations du projet">
+      <mat-icon>info</mat-icon>
+    </button>
+
+    <button mat-icon-button matTooltip="Options">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+</div>
+
+
+    <div class="liste-messages">
+      <div *ngFor="let msg of messages"
+           class="message-container"
+           [ngClass]="{'envoye': msg.expediteur?.id === userId, 'recu': msg.expediteur?.id !== userId}">
+        <div class="message-bulle">
+
+          <!-- Texte -->
+          <p class="message-contenu" *ngIf="msg.contenu">{{ msg.contenu }}</p>
+
+          <!-- Image -->
+          <div *ngIf="msg.fichier && msg.typeFichier?.startsWith('image/')" class="message-image">
+            <img [src]="'http://localhost:3000/' + msg.fichier"
+                 [alt]="msg.nomOriginalFichier || 'Image partagée'" />
+            <div class="fichier-info">
+              <span>{{ msg.nomOriginalFichier || 'Image' }}</span>
+              <button (click)="downloadFile(msg.fichier.split('/').pop()!)" class="download-btn" type="button">
+                <mat-icon style="color: white">download</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <!-- Autres fichiers -->
+          <div *ngIf="msg.fichier && !msg.typeFichier?.startsWith('image/')" class="message-fichier">
+            <a [href]="'http://localhost:3000/' + msg.fichier" target="_blank" rel="noopener">
+              <mat-icon>attach_file</mat-icon>
+              {{ msg.nomOriginalFichier || (msg.fichier.split('-').slice(1).join('-')) }}
+            </a>
+            <button (click)="downloadFile(msg.fichier.split('/').pop()!)" class="download-btn" type="button">
+              <mat-icon style="color: white;">download</mat-icon>
+            </button>
+          </div>
+
+          <span class="message-date">{{ msg.date_creation | date: 'shortTime' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone de saisie -->
+    <div class="chat-input">
+     <mat-form-field appearance="outline">
+  <textarea
+      matInput
+      [(ngModel)]="nouveauMessage"
+      (keydown.enter)="envoyerMessage()"
+      placeholder="Écrivez un message..."
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="5"
+      class="chat-textarea">
+  </textarea>
+</mat-form-field>
+
+      <!-- Upload fichier -->
+      <div class="file-upload-container" (click)="$event.stopPropagation()">
+        <div *ngIf="fichier" class="file-selected">
+          <span>{{ fichier.name }}</span>
+          <button (click)="supprimerFichier(); $event.stopPropagation();" type="button">✕</button>
+        </div>
+
+        <label class="file-upload-label" (click)="$event.stopPropagation()">
+          <mat-icon>cloud_upload</mat-icon>
+          <span>Joindre</span>
+          <input type="file" (change)="fichierSelectionne($event)" accept="*/*" hidden aria-hidden="true" />
+        </label>
+      </div>
+
+      <button class="envoyer-icon-btn" type="button" (click)="envoyerMessage()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

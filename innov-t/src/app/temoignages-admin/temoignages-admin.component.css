@@ -1,0 +1,194 @@
+:root {
+  --primary: #007C89;
+  --primary-light: #26A3AF;
+  --white: #ffffff;
+  --gray: #d1d5db;
+  --dark-gray: #4a4a4a;
+}
+
+/* ===== CONTENEUR DES CARTES ===== */
+.temoignages-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+/* ===== CARTEtemoignage ===== */
+/* Correct : ciblage de la classe .temoignage-card */
+.temoignage-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 124, 137, 0.15);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.temoignage-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 124, 137, 0.2);
+}
+
+
+/* ===== HEADER CARTE ===== */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #007C89;
+  color: white;
+  padding: 12px 16px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-weight: 600;
+}
+.card-header .statut {
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  
+  text-transform: capitalize;
+}
+
+/* ===== BODY CARTE ===== */
+.card-body {
+  padding: 14px 16px;
+  color: #4a4a4a;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.card-body p {
+  margin-bottom: 8px;
+}
+.btn-voir-plus {
+  background: transparent;
+  border: none;
+  color: #007C89;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-left: 4px;
+}
+.btn-voir-plus:hover {
+  text-decoration: underline;
+}
+
+/* ===== FOOTER CARTE ===== */
+.card-footer {
+  display: flex;
+  justify-content: flex-end; /* boutons collés à droite */
+  gap: 12px;
+  padding: 12px 16px;
+  border-top: 1px solid #4a4a4a;
+}
+.btn-valider, .btn-refuser {
+
+  padding: 8px 12px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-valider {
+  background: #007C89;
+  color: white;
+}
+.btn-valider:hover {
+  background: #26A3AF;
+  transform: translateY(-2px);
+}
+.btn-refuser {
+  background: #e74c3c;
+  color: white;
+}
+.btn-refuser:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* ===== MODAL DESCRIPTION ===== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* ----- Contenu principal ----- */
+.modal-conten {
+  width: 420px;
+  max-width: 100%;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 12px 30px rgba(0, 124, 137, 0.25);
+  transform: translateY(-6px);
+  animation: modalPop 250ms ease-out forwards;
+  z-index: 3100;
+  border: 2px solid #007C89;
+}
+
+/* Animation d'apparition */
+@keyframes modalPop {
+  from { opacity: 0; transform: translateY(-15px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ----- Icône en haut ----- */
+.modal-icon {
+  font-size: 2.8rem;
+  margin-bottom: 12px;
+  display: inline-block;
+  color: #007C89;
+}
+
+/* ----- Titres et textes ----- */
+.modal-conten h2 {
+  margin: 8px 0 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #003d46;
+}
+
+.modal-conten p {
+  margin: 0 0 20px;
+  color: #4b5a5f;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ----- Bouton fermer ----- */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f4f7f8;
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+  color: #007C89;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.close-btn:hover { background: #007C89; color: #fff; }
+
+/* ----- Actions (boutons) ----- */
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+/* ===== MODAL CONFIRMATION ===== */
+

@@ -17,14 +17,6 @@ export class Commande {
     @PrimaryColumn()
     commandes_id: string = ""; 
 
-    @ManyToOne(() => Utilisateur, utilisateur => utilisateur.commandes, { onDelete: "CASCADE" })
-    @JoinColumn({ name: "client_id" })
-    client!: Utilisateur;
-
-    @ManyToOne(() => ServicesEntity, service => service.commandes, { onDelete: "CASCADE" })
-    @JoinColumn({ name: "service_id" })
-    service!: ServicesEntity;
-
     @Column("text")
     description_besoins: string = "";
 
@@ -45,15 +37,23 @@ export class Commande {
     date_livraison?: Date;
 
     @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
-    montant_final?: number;
+    montant_estime?: number;
 
 
     @BeforeInsert()
     generateCommandeId() {
-      const randomNum = Math.floor(Math.random() * 900 + 100); // ex: CM_537
+      const randomNum = Math.floor(Math.random() * 900 + 100); 
       this.commandes_id = `CM_${randomNum}`;
     }
 
     @OneToMany(() => Projet, projet => projet.commande)
       projets?: Projet[];
+
+    @ManyToOne(() => Utilisateur, utilisateur => utilisateur.commandes, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "client_id" })
+    client!: Utilisateur;
+
+    @ManyToOne(() => ServicesEntity, service => service.commandes, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "service_id" })
+    service!: ServicesEntity;  
 }

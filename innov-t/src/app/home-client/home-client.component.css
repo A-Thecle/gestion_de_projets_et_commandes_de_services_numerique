@@ -1,0 +1,187 @@
+/* Empêche tout scroll de la page */
+:host {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* SECTION PRINCIPALE */
+.home-client {
+  font-family: 'Inter', sans-serif;
+  color: #1e293b;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Donne un effet premium subtil */
+  animation: fadeIn 0.7s ease-out;
+}
+
+/* ANIMATION D’ENTRÉE */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* TITRES */
+.hero-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.welcome-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #007c89, #00b2a9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 8px 0;
+}
+
+.welcome-title span {
+  color: #007c89 !important;
+}
+
+.subtitle {
+  font-size: 1.18rem;
+  color: #475569;
+  opacity: 0.85;
+}
+
+/* GRILLE 3 CARTES — Hauteur parfaitement maîtrisée */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+
+  max-width: 1050px;
+  width: 100%;
+
+  /* Contraint la zone pour éviter tout scroll */
+  padding-bottom: 10px;
+}
+
+/* ELEMENT CLICKABLE */
+.card-link {
+  display: block;
+  cursor: pointer;
+  border-radius: 22px;
+  transition: transform 0.25s ease;
+}
+
+.card-link:hover {
+  transform: translateY(-6px);
+}
+
+/* CARTE */
+.card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 178, 169, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  padding: 32px 22px;
+  height: 235px; /* Hauteur contrôlée */
+
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(0, 124, 137, 0.1);
+  transition: all 0.35s ease;
+  position: relative;
+}
+
+/* Effet bandeau animé */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #007c89, #00e0c3);
+  transform: scaleX(0);
+  transition: transform 0.45s ease;
+}
+
+.card-link:hover .card::before {
+  transform: scaleX(1);
+}
+
+/* ICONES */
+.card-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+
+  background: linear-gradient(135deg, #007d8a, #00d4c0);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.35s ease;
+}
+
+.card-icon svg {
+  width: 40px;
+  height: 40px;
+  stroke: #fff;
+}
+
+.card-link:hover .card-icon {
+  transform: scale(1.14) rotate(6deg);
+}
+
+/* TITRE CARTE */
+.card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #0f172a;
+}
+
+/* TEXTE CARTE */
+.card p {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* FLÈCHE */
+.arrow {
+  font-size: 1.9rem;
+  color: #00b2a9;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.35s ease;
+  font-weight: bold;
+}
+
+.card-link:hover .arrow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .home-client {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .welcome-title {
+    font-size: 2.2rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
+
+  .card {
+    height: auto;
+    padding: 28px 20px;
+  }
+}

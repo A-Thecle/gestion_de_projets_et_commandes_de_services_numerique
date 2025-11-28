@@ -42,4 +42,10 @@ updateStatus(@Param('id') id: number, @Body('statut') statut: 'publié' | 'refus
   findPublished() {
     return this.service.findPublished();
   }
+
+@Get('available-projets/:id')
+findByClient(@Param('id') id: number) {
+  return this.service.getAvailableProjetsForClient(id);
+}
+
 }

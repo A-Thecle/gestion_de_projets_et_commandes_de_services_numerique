@@ -1,0 +1,285 @@
+/* ============================== 
+   MODAL - ÉDITION DE PROJET
+   Charte : #007C89 + Blanc
+   Style : Premium, épuré, fluide
+   ============================== */
+
+/* ===== Conteneur principal ===== */
+.mat-mdc-dialog-container {
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(0, 124, 137, 0.25);
+  background: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 0.3s ease;
+  overflow: hidden;
+}
+
+/* ===== En-tête ===== */
+.modal-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px;
+  color: #007C89;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+   font-size: 1.3rem;
+}
+
+.modal-icon {
+  font-size: 1.6rem;
+  margin-right: 10px;
+  color: #007C89;
+}
+
+/* ===== Bouton de fermeture ===== */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f4f7f8;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #007C89;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.close-btn:hover {
+  background: #007C89;
+  color: #fff;
+}
+
+/* ===== Contenu ===== */
+mat-dialog-content {
+  padding: 28px 30px;
+}
+
+/* ===== Formulaire ===== */
+.formulaire-projet mat-form-field.w-100 {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+mat-label {
+  color: #007C89;
+  font-weight: 600;
+   font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+/* Champs (input, textarea, select) */
+input[matInput],
+textarea[matInput],
+mat-select {
+  border: 1px solid #cfd8dc;
+  border-radius: 10px;
+  background: #ffffff; /* fond blanc propre */
+  color: #2c2c2c;
+  font-size: 0.95rem;
+  padding: 11px 13px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 124, 137, 0.08);
+}
+
+input[matInput]:focus,
+textarea[matInput]:focus,
+mat-select:focus {
+  border-color: #007C89;
+  box-shadow: 0 0 8px rgba(0, 124, 137, 0.25);
+}
+
+/* Options du select */
+mat-option {
+  color: #007C89;
+  background-color: #007C89;
+}
+mat-option:hover {
+  background: rgba(0, 124, 137, 0.1);
+}
+
+
+
+/* ===== Pied du modal ===== */
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 18px 26px;
+  background: #fafafa;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* ===== Bouton ANNULER ===== */
+.btn-annuler {
+ background: #e8f2f3;
+  color: #007C89;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+.btn-annuler:hover {
+  background: #d6ecee;
+}
+
+/* ===== Bouton ENREGISTRER ===== */
+.btn-enregistrer {
+  background: linear-gradient(90deg, #007C89, #00a3b3);
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 10px 26px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+.btn-enregistrer:hover {
+  background: linear-gradient(90deg, #0097a7, #00b6c2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 124, 137, 0.35);
+}
+
+/* ===== Animation d’apparition ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .mat-mdc-dialog-container {
+    width: 95%;
+    border-radius: 10px;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+    padding: 14px;
+  }
+
+  .dialog-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-annuler,
+  .btn-enregistrer {
+    width: 100%;
+  }
+}
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-weight: 550;
+  color: #333;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.form-control {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #dde4e6;
+  font-size: 0.95rem;
+  color: #333;
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007C89;
+  box-shadow: 0 0 6px rgba(0,124,137,0.25);
+}
+
+
+
+
+.form-error {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.dialog-actions {
+  padding: 16px 22px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #f9fbfc;
+  border-top: 1px solid #e0e6eb;
+}
+
+/* Boutons */
+.btn-annuler {
+   background: #f1f5f6;
+  color: #333;
+  border: 2px solid #e0e6e8;
+}
+
+.btn-annuler:hover {
+  background: #e7f4f5;
+  color: #007C89;
+  transform: translateY(-2px);
+}
+
+.btn-enregistrer {
+  background: #007C89;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-enregistrer:hover {
+  background: linear-gradient(135deg, #007C89, #0099a8);
+  box-shadow: 0 4px 10px rgba(0,124,137,0.3);
+  transform: translateY(-1px);
+}
+
+.btn-enregistrer:active {
+  transform: scale(0.98);
+}
+
+.btn-enregistrer[disabled] {
+  background: #cfd8dc;
+  color: #666;
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+#etat option {
+  padding: 8px;
+  background-color: #ffffff !important;
+  color: #007C89 !important;
+  cursor: pointer;
+  font-weight: bold;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+#etat option:checked,
+#etat option:focus,
+#etat option:hover {
+  background-color: #007C89 !important;
+  color: #ffffff !important;
+}
+

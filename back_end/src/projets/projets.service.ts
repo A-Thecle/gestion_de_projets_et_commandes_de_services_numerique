@@ -66,15 +66,19 @@ export class ProjetsService {
   }
 
  async updateProject(id: string, updateProjetDto: Partial<Projet>): Promise<Projet> {
-  if (updateProjetDto.etat) {
-    // si le champ "etat" est fourni → utiliser la logique avec notification
-    return this.updateProjetStatus(id, updateProjetDto.etat as EtatProjet);
+      const projet = await this.findOneProject(id);
+     const etatChange = updateProjetDto.etat && updateProjetDto.etat !== projet.etat;
+     Object.assign(projet, updateProjetDto);
+
+  
+  const updatedProjet = await this.projetRepo.save(projet);
+
+ 
+  if (etatChange) {
+    await this.updateProjetStatus(id, updateProjetDto.etat as EtatProjet);
   }
 
-  // sinon, mise à jour classique sans notification
-  const projet = await this.findOneProject(id);
-  Object.assign(projet, updateProjetDto);
-  return this.projetRepo.save(projet);
+  return updatedProjet;
 }
 
  async removeProject(id: string): Promise<void> {

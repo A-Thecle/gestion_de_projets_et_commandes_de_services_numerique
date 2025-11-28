@@ -1,0 +1,213 @@
+/* ===== STRUCTURE MODAL ===== */
+:host {
+  display: block;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0, 124, 137, 0.2);
+  max-width: 750px;
+  width: 95%;
+  margin: 0 auto;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== HEADER DU MODAL ===== */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  padding: 14px 20px;
+  
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+.modal-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+  color: #007C89;
+}
+
+.header-close-btn {
+position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f4f7f8;
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+  color: #007C89;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.header-close-btn:hover {
+  
+  background: #007C89;
+  color: #fff;
+}
+
+/* ===== LOADING ===== */
+.loading {
+  text-align: center;
+  padding: 40px 15px;
+  color: #555;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0,124,137,0.2);
+  border-top: 4px solid #007C89;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 12px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== CONTENU PRINCIPAL ===== */
+.client-content {
+  padding: 24px 20px;
+}
+
+/* ===== HEADER CLIENT ===== */
+.client-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(135deg, rgba(0,124,137,0.05), rgba(0,163,180,0.08));
+  border: 1px solid rgba(0,124,137,0.2);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 24px;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+.client-info h3 {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #007C89, #00A3B4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.client-info p {
+  margin: 3px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ===== CARTE ===== */
+.card {
+  border-radius: 14px;
+  border: 1px solid #e0e6f0;
+  box-shadow: 0 4px 12px rgba(0, 124, 137, 0.08);
+  background: #fff;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.card-header {
+  color: #007C89;
+  padding: 10px 14px;
+  font-weight: 600;
+  font-size: 15px;
+  border-bottom: 1px solid #e0e6f0;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.table-commandes {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.table-commandes th,
+.table-commandes td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+.table-commandes th {
+  background-color: #f7f9fc;
+  color: #007C89;
+  font-weight: 600;
+}
+.table-commandes tr:hover {
+  background: rgba(0, 124, 137, 0.05);
+}
+
+/* ===== BADGES STATUT ===== */
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.status-en-cours { background: #dbeafe; color: #1e40af; }
+.status-livré { background: #d1fae5; color: #065f46; }
+.status-annulé { background: #fee2e2; color: #991b1b; }
+.status-en-attente { background: #fef3c7; color: #92400e; }
+
+/* ===== AUCUNE COMMANDE ===== */
+.empty-card {
+  text-align: center;
+  padding: 30px;
+  color: #777;
+  font-style: italic;
+}
+
+/* ===== BOUTON FERMER ===== */
+.dialog-actions {
+  padding: 16px 20px;
+  background: linear-gradient(90deg, #f9f9ff, #f0f8ff);
+  border-top: 1px solid rgba(0, 124, 137, 0.15);
+}
+
+.close-btn {
+  background: linear-gradient(90deg, #007C89, #00A3B4);
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: all 0.25s ease;
+  border: none;
+}
+.close-btn:hover {
+  background: linear-gradient(90deg, #006869, #008b9a);
+  box-shadow: 0 6px 16px rgba(0,124,137,0.25);
+  transform: translateY(-2px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .client-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .avatar-container {
+    width: 60px;
+    height: 60px;
+  }
+  h2[mat-dialog-title] {
+    font-size: 20px;
+  }
+  .table-commandes th,
+  .table-commandes td {
+    font-size: 12.5px;
+    padding: 8px 10px;
+  }
+}

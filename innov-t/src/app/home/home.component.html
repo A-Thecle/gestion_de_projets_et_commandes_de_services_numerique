@@ -1,0 +1,153 @@
+<div class="public-layout">
+
+  <!-- Hero Section -->
+<section class="hero-modern">
+  <div class="hero-content">
+    <h4 class="hero-subtitle">PLANIFIER. CONSTRUIRE. LIVRER.</h4>
+
+    <h1 class="hero-title">Accélérez Vos Projets<br><span>et Services Numériques</span></h1>
+
+    <p class="hero-text">
+      Optimisez la gestion de vos projets, digitalisez vos processus et pilotez vos services
+      numériques avec efficacité. Nous transformons vos idées en solutions concrètes, fiables,
+      et alignées sur vos objectifs stratégiques.
+    </p>
+
+    <div class="hero-buttons">
+      <a [routerLink]="['/services']" class="btn-modern primary">Voir Nos Services</a>
+      <a [routerLink]="['/contact']" class="btn-modern secondary">Parler à un Expert</a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="assets/banniere2.png" alt="Professional Woman">
+  </div>
+</section>
+
+
+
+
+  <!-- About Section -->
+  <section class="about-pro">
+  <div class="about-pro-container">
+
+    <div class="about-pro-text">
+      <h2 class="section-title-pro">À propos d’Innov-T</h2>
+
+      <p>
+        Fondée à Madagascar, <strong>Innov-T</strong> accompagne les organisations 
+        dans leur <strong>transformation digitale</strong> et la création de 
+        solutions numériques innovantes.
+      </p>
+
+      <p>
+        Nous aidons les entreprises à <strong>moderniser leurs processus</strong>, 
+        optimiser leurs performances et déployer des outils adaptés aux enjeux 
+        actuels : applications web, mobile, plateformes métiers et solutions sur mesure.
+      </p>
+
+      <ul class="about-pro-list">
+        <li><span>✔</span> Accompagnement digital sur mesure</li>
+        <li><span>✔</span> Développement web et mobile moderne</li>
+        <li><span>✔</span> Automatisation & optimisation des services</li>
+        <li><span>✔</span> Expertise locale, standards internationaux</li>
+      </ul>
+    </div>
+
+    <div class="about-pro-image">
+      <div class="about-pro-image-frame">
+        <img src="assets/innov.jpg" alt="Équipe Innov-T Madagascar">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <h2 class="section-title">Nos Services</h2>
+    <div class="services-cards">
+      <div *ngFor="let service of services; let i = index" class="service-card">
+        <span class="icon" [ngClass]="getIconClass(i)" [attr.aria-label]="service.nom_service"></span>
+        <h3>{{ service.nom_service }}</h3>
+        <p>{{ getFirstTwoSentences(service.description_service) }}...</p>
+      </div>
+    </div>
+  </section>
+
+
+<section class="contact-pro">
+  <h2 class="section-title-pro">Contactez-nous</h2>
+
+  <div class="contact-pro-container">
+
+    <div class="contact-pro-card">
+      <i class="fas fa-phone-alt"></i>
+      <h3>Téléphone</h3>
+      <p>+261 38 10 788 60</p>
+    </div>
+
+    <div class="contact-pro-card">
+      <i class="fas fa-map-marker-alt"></i>
+      <h3>Localisation</h3>
+      <p>Beravina, Fianarantsoa – Madagascar</p>
+    </div>
+
+    <div class="contact-pro-card">
+      <i class="fas fa-envelope"></i>
+      <h3>Email</h3>
+      <p>contactinnovt&#64;gmail.com</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+  <div class="testimonials-header">
+    <h2 class="section-title">Ce que disent nos clients</h2>
+  </div>
+
+  <div class="testimonials-row" *ngIf="publishedTemoignages.length > 0; else noTemoignages">
+    <ng-container *ngFor="let t of publishedTemoignages.concat(publishedTemoignages)">
+      <article class="testimonial-card">
+        <div class="testimonial-header">
+          <div class="avatar-placeholder"><i class="fas fa-user"></i></div>
+          <div class="client-info">
+            <strong>{{ t.client?.nom }} {{ t.client?.prenom }}</strong>
+            <div class="rating">
+              <ng-container *ngFor="let _ of getStars(t.note ?? 0)">
+                <span class="star full">★</span>
+              </ng-container>
+              <ng-container *ngFor="let _ of getEmptyStars(t.note ?? 0)">
+                <span class="star empty">☆</span>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <p class="comment">{{ t.commentaire }}</p>
+        <div class="meta">
+          <span class="date">{{ t.date_soumission | date: 'dd/MM/yyyy' }}</span>
+          <span class="project-title" *ngIf="t.projet">{{ t.projet.titre_projet }}</span>
+        </div>
+      </article>
+    </ng-container>
+  </div>
+
+  <ng-template #noTemoignages>
+    <p class="no-temoignages">Aucun témoignage publié pour le moment.</p>
+  </ng-template>
+
+  <div class="see-more-container">
+    <button class="btn-primary see-more" [routerLink]="['/temoignages']" aria-label="Voir plus de témoignages">
+      Voir plus de témoignages
+    </button>
+  </div>
+</section>
+
+
+
+
+
+</div>

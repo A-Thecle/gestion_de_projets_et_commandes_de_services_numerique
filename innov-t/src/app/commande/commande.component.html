@@ -1,0 +1,113 @@
+<div *ngIf="loading">Chargement des commandes...</div>
+
+
+<div class="commandes-cards" *ngIf="!loading">
+ <div class="commande-card text-center"
+     *ngFor="let cmd of filteredCommandes | paginate: { itemsPerPage: 6, currentPage: currentPage }">
+
+
+    <div class="card-header">
+      <span class="commande-id">{{ cmd.commandes_id }}</span>
+      <span class="statut">{{ cmd.statut_commande }}</span>
+    </div>
+    
+    <div class="card-body">
+      <p><strong>Client:</strong> {{ cmd.client.nom }} {{ cmd.client.prenom }} ({{ cmd.client.email }})</p>
+      <p><strong>Service:</strong> {{ cmd.service.nom_service }} - min({{ cmd.service.prix_minimum  }} Ar) </p>
+      <p><strong>Description:</strong> 
+        {{ cmd.description_besoins.length > 20 ? (cmd.description_besoins | slice:0:20) + '...' : cmd.description_besoins }}
+        <button *ngIf="cmd.description_besoins.length > 20" class="btn-voir-plus" (click)="openDescriptionModal(cmd.description_besoins)">Voir plus</button>
+      </p>
+   
+
+      <p><strong>Date Commande:</strong> {{ cmd.date_commande | date:'dd/MM/yyyy HH:mm' }}</p>
+      <p><strong>Date Livraison:</strong> {{ cmd.date_livraison ? (cmd.date_livraison | date:'dd/MM/yyyy') : '-' }}</p>
+      <p><strong>Montant estimé:</strong> {{ cmd.montant_estime}} Ar</p>
+        <p>
+  <strong>Fichier joint:</strong>
+  <ng-container *ngIf="cmd.fichier_joint; else noFile">
+    <a [href]="encodeFileUrl(cmd.fichier_joint)" target="_blank" style="color: #0077C8;">Ouvrir le fichier joint</a>
+  </ng-container>
+  <ng-template #noFile>
+    <span style="color: #888;">Aucun fichier joint</span>
+  </ng-template>
+</p>
+    </div>
+    
+    <div class="card-footer">
+  <button 
+    class="btn-valider"
+    [disabled]="cmd.statut_commande === 'acceptee' || cmd.statut_commande === 'refusee'"
+    (click)="confirmAction(cmd.commandes_id, 'valider')">
+    Valider
+  </button>
+
+  <button 
+    class="btn-refuser"
+    [disabled]="cmd.statut_commande === 'acceptee' || cmd.statut_commande === 'refusee'"
+    (click)="confirmAction(cmd.commandes_id, 'refuser')">
+    Refuser
+  </button>
+</div>
+
+  </div>
+
+  <!-- Modal pour la description complète -->
+  <div class="modal-backdrop" *ngIf="showDescriptionModal">
+    <div class="modal-conten">
+      <button class="close-btn" (click)="closeDescriptionModal()">&times;</button>
+      <h2>Description complète</h2>
+      <p class="description">{{ selectedDescription }}</p>
+      
+    </div>
+  </div>
+
+  <!-- Modal de confirmation -->
+  <div class="confirmation-modal" *ngIf="showConfirmModal">
+    <div class="modal-content">
+      <h3>
+ 
+  Confirmation
+</h3>
+
+      <p>
+        Voulez-vous vraiment
+        {{ currentAction === 'valider' ? 'valider' : 'refuser' }}
+        cette commande ?
+      </p>
+      <div class="modal-actions">
+        <button (click)="executeAction()" style="color: white">Oui</button>
+        <button (click)="showConfirmModal = false" style="color: red;">Non</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Modal de succès -->
+  <div class="confirmation-modal" *ngIf="showSuccessModal">
+    <div class="modal-content">
+      <h3>
+      
+      Succès
+      </h3>
+
+      <p>{{ successMessage }}</p>
+      <button (click)="closeSuccessModal()">OK</button>
+    </div>
+  </div>
+
+</div>
+  <!-- Pagination -->
+<pagination-controls 
+  (pageChange)="currentPage = $event"
+  previousLabel="« Précédent" 
+  nextLabel="Suivant »" 
+  class="d-flex justify-content-center mt-4"
+  [autoHide]="false"
+  [responsive]="true"
+  [maxSize]="5"
+  [directionLinks]="true"
+  screenReaderPaginationLabel="Page"
+  screenReaderCurrentLabel="de {currentPage}">
+</pagination-controls>

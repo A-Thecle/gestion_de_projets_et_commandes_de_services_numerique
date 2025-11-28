@@ -1,0 +1,148 @@
+<!-- ✅ Témoignages Modernisés -->
+<div class="temoignages-container">
+   <div class="temoignages-header">
+  <h2 class="section-title">Témoignages Clients</h2>
+
+  <button class="open-popup-btn" (click)="openPopup()">
+    <mat-icon class="icon-temoignage">reviews</mat-icon>
+    Laisser un témoignage
+  </button>
+</div>
+
+
+  <!-- ✅ Liste des témoignages avec scroll et pagination -->
+ <div class="testimonials-wrapper">
+  <div class="testimonials-row" *ngIf="publishedTemoignages.length > 0">
+    <article
+      class="testimonial-card"
+      *ngFor="let t of publishedTemoignages | paginate: { itemsPerPage: 4, currentPage: currentPage }"
+    >
+      <div class="testimonial-header">
+        <div class="avatar-placeholder">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="client-info">
+          <strong>{{ t.client?.nom }} {{ t.client?.prenom }}</strong>
+          <div class="rating">
+            <ng-container *ngFor="let _ of getStars(t.note ?? 0)">
+              <span class="star full">★</span>
+            </ng-container>
+            <ng-container *ngFor="let _ of getEmptyStars(t.note ?? 0)">
+              <span class="star empty">☆</span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <p class="comment">{{ t.commentaire }}</p>
+
+      <div class="meta">
+        <span class="date">{{ t.date_soumission | date: 'dd/MM/yyyy' }}</span>
+        <span class="project-title" *ngIf="t.projet">{{ t.projet.titre_projet }}</span>
+      </div>
+    </article>
+  </div>
+
+ 
+</div>
+ <!-- Pagination -->
+  <pagination-controls
+    (pageChange)="currentPage = $event"
+    previousLabel="« Précédent"
+    nextLabel="Suivant »"
+    class="pagination-controls"
+    [autoHide]="false"
+    [responsive]="true"
+    [maxSize]="6"
+    [directionLinks]="true"
+  ></pagination-controls>
+
+
+<!-- ✅ Popup d’ajout de témoignage -->
+<div class="popup" *ngIf="showPopup">
+  <div class="popup-content">
+    <span class="close-btn" (click)="showPopup = false">&times;</span>
+    <h3 class="popup-title">
+  <mat-icon class="icon-temoignage2">reviews</mat-icon>
+  Laisser un témoignage
+</h3>
+
+
+    <!-- ✅ Message si aucun projet disponible pour témoignage -->
+    <p *ngIf="projets.length === 0" class="info">
+      Aucun projet disponible pour laisser un témoignage pour le moment.
+    </p>
+
+    <!-- ✅ Formulaire si projets disponibles -->
+    <form *ngIf="projets.length > 0" #temoignageForm="ngForm" (ngSubmit)="envoyer()" novalidate>
+      <!-- Projet concerné -->
+      <label>Projet concerné</label>
+      <select [(ngModel)]="temoignage.id_projet" name="id_projet" required>
+        <option value="" disabled selected>-- Sélectionnez un projet terminé --</option>
+        <option *ngFor="let p of projets" [value]="p.projet_id">
+          {{ p.titre_projet }} - {{ p.date_creation | date }}
+        </option>
+      </select>
+
+      <div *ngIf="temoignageForm.controls['id_projet']?.invalid && temoignageForm.controls['id_projet']?.touched" class="error">
+        Veuillez sélectionner un projet.
+      </div>
+
+      <!-- Note -->
+      <label>Note (1 à 5)</label>
+      <input
+        type="number"
+        [(ngModel)]="temoignage.note"
+        name="note"
+        min="1"
+        max="5"
+        required
+        #note="ngModel"
+      />
+      <div *ngIf="note.invalid && note.touched" class="error">
+        La note doit être entre 1 et 5.
+      </div>
+
+      <!-- Commentaire -->
+      <label>Commentaire</label>
+      <textarea
+        [(ngModel)]="temoignage.commentaire"
+        name="commentaire"
+        minlength="20"
+        maxlength="50"
+        required
+        (input)="updateCharCount()"
+        placeholder="Exprimez brièvement votre avis (20 à 50 caractères max)"
+        #commentaire="ngModel"
+      ></textarea>
+
+      <div class="char-counter">{{ charCount }}/50</div>
+      <div *ngIf="commentaire.invalid && commentaire.touched" class="error">
+        Le commentaire doit contenir entre 20 et 50 caractères.
+      </div>
+      <div *ngIf="charCount > 50" class="error">
+        Le commentaire ne doit pas dépasser 50 caractères.
+      </div>
+
+      <!-- Boutons -->
+      <div class="popup-actions">
+        <button type="button" class="btn-cancel" (click)="showPopup = false">Annuler</button>
+        <button type="submit" class="btn-submit" [disabled]="temoignageForm.invalid">Envoyer</button>
+      </div>
+    </form>
+
+    <!-- Notification éventuelle -->
+    <p *ngIf="message && projets.length > 0" class="notification">{{ message }}</p>
+  </div>
+</div>
+
+
+  <!-- ✅ Modal de confirmation -->
+  <div class="confirmation-modal" *ngIf="showConfirmation">
+    <div class="modal-content">
+      <h3>Merci pour votre témoignage !</h3>
+      <p>Votre témoignage sera publié après validation par l’administrateur.</p>
+      <button (click)="closeConfirmation()">OK</button>
+    </div>
+  </div>
+</div>

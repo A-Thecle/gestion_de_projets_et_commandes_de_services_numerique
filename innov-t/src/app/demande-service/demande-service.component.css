@@ -1,0 +1,321 @@
+/* ===================================
+   FORMULAIRE DEMANDE DE SERVICE – VERSION SOUTENANCE 2025
+   Charte Innov 2025 - #007C89 / #00A3B3
+   =================================== */
+
+/* -------- Conteneur principal -------- */
+.demande-service {
+  max-width: 720px;
+  margin: 45px auto;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0, 124, 137, 0.18);
+  padding: 40px 45px;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.7s ease-out;
+}
+
+/* Ligne décorative */
+.demande-service::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 7px;
+  background: linear-gradient(90deg, #007C89, #00A3B3);
+  border-radius: 18px 18px 0 0;
+}
+
+/* -------- Titre -------- */
+.form-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  background: linear-gradient(90deg, #007C89, #00A3B3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.8px;
+}
+
+/* -------- Formulaire global -------- */
+.service-form {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+/* Ligne à 2 colonnes */
+.form-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+/* Groupe de champ */
+.form-group {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.form-group label {
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 8px;
+  font-size: 0.96rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* -------- TOUS LES CHAMPS -------- */
+.form-group select,
+.form-group input,
+.form-group textarea,
+.file-input-wrapper {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 0.95rem;
+  border: 2.2px solid #e8edf0;
+  border-radius: 12px;
+  background: #f8fafb;
+  color: #333;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus,
+.file-input-wrapper:hover {
+  border-color: #007C89;
+  background: #fff;
+  box-shadow: 0 0 0 5px rgba(0, 124, 137, 0.12);
+  outline: none;
+}
+
+
+
+/* -------- CHAMP MONTANT ESTIMÉ -------- */
+.montant-group {
+  position: relative;
+}
+
+.montant-group .currency-prefix {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #007C89;
+  font-weight: 600;
+  font-size: 0.95rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.montant-group input {
+  padding-left: 48px !important;
+}
+
+/* -------- TEXTAREA -------- */
+.form-group textarea {
+  min-height: 110px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* -------- ERREURS -------- */
+.error {
+  color: #d9534f;
+  font-size: 0.84rem;
+  margin-top: 6px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* -------- PETITS TEXTES -------- */
+small {
+  color: #666;
+  font-size: 0.84rem;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* -------- BOUTONS -------- */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.btn-submit,
+.btn-cancel {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.02rem;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  min-width: 130px;
+}
+
+.btn-submit {
+  background: linear-gradient(90deg, #007C89, #00A3B3);
+  color: white;
+  box-shadow: 0 7px 20px rgba(0, 124, 137, 0.3);
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: linear-gradient(90deg, #00A3B3, #007C89);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 124, 137, 0.4);
+}
+
+.btn-submit:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-cancel {
+  background: #f5f9fa;
+  color: #444;
+  border: 2.2px solid #dce7e9;
+}
+
+.btn-cancel:hover {
+  background: #e7f4f5;
+  color: #007C89;
+  border-color: #007C89;
+  transform: translateY(-2px);
+}
+
+/* -------- MESSAGES -------- */
+.error-message {
+  background: rgba(217, 83, 79, 0.1);
+  color: #d9534f;
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 20px;
+  border-left: 4px solid #d9534f;
+}
+
+/* -------- ANIMATIONS -------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -------- MOBILE -------- */
+@media (max-width: 768px) {
+  .demande-service {
+    margin: 20px 15px;
+    padding: 30px 25px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-group {
+    min-width: 100%;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-submit,
+  .btn-cancel {
+    width: 100%;
+  }
+  
+  .file-input-wrapper {
+    padding: 14px 16px;
+  }
+}
+.file-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  /* même hauteur que le champ Montant estimé */
+  min-height: 30px;
+  padding: 5px 8px;
+
+  border-radius: 12px;
+  background: #f8fafb;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  
+}
+
+.file-input-wrapper:hover {
+  background: #f0f7f8;
+  border-style: solid;
+  transform: translateY(-1px);
+}
+
+.file-input-wrapper.has-file {
+
+}
+
+.file-input-wrapper .upload-icon {
+  font-size: 1.4rem;
+  color: #007C89;
+  flex-shrink: 0;
+}
+
+.file-input-wrapper .file-text {
+  flex: 1;
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.file-input-wrapper .placeholder-text {
+  color: #888;
+  font-style: italic;
+}
+
+.file-input-wrapper .selected-text {
+  color: #007C89;
+  font-weight: 600;
+}
+
+/* Bouton supprimer */
+.delete-all-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ff4757;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.delete-all-btn:hover {
+  transform: scale(1.1) rotate(90deg);
+  background: #ff3742;
+  box-shadow: 0 5px 15px rgba(255,71,87,0.4);
+}

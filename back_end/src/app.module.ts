@@ -21,7 +21,7 @@ import { ContactController } from './contact/contact.controller';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.env', // 🔑 indique bien le fichier
+      envFilePath: '.env', 
     }),
 
     TypeOrmModule.forRootAsync({

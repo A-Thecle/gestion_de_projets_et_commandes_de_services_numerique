@@ -1,0 +1,235 @@
+/* ================================
+   🌐 MODAL INNOV 2025
+   Couleurs : #007C89 (primaire), #FFFFFF (fond)
+   Style : épuré, professionnel, cohérent avec la sidebar & header
+   ================================= */
+
+/* Structure principale */
+.mat-mdc-dialog-container {
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e4eaec;
+  max-width: 520px;
+  width: 90%;
+  font-family: 'Poppins', sans-serif;
+  padding: 0;
+  animation: modalFade 0.25s ease-in-out;
+  overflow: hidden;
+}
+
+/* ======= HEADER DU MODAL ======= */
+.modal-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px;
+  
+  color: #007C89;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.modal-icon {
+  font-size: 1.6rem;
+  margin-right: 10px;
+  color: #007C89;
+}
+
+
+/* Bouton de fermeture (❌) */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f4f7f8;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #007C89;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.close-btn:hover {
+  background: #007C89;
+  color: #fff;
+}
+
+/* ======= CONTENU ======= */
+mat-dialog-content {
+  padding: 26px 22px 18px;
+  background: #ffffff;
+}
+
+mat-form-field.w-100 {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Label des champs */
+mat-label {
+  font-weight: 600;
+  color: #007C89;
+  font-size: 1.2rem;
+}
+
+/* Inputs, textareas, selects */
+input[matInput],
+textarea[matInput],
+mat-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #dde4e6;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #333;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+input[matInput]:focus,
+textarea[matInput]:focus,
+mat-select:focus {
+  border-color: #007C89;
+  box-shadow: 0 0 6px rgba(0, 124, 137, 0.25);
+}
+
+/* Sélecteurs */
+mat-option {
+  color: #007C89;
+}
+mat-option:hover {
+  background: #f3fafa;
+}
+
+/* ======= PIED DU MODAL ======= */
+mat-dialog-actions {
+  padding: 16px 22px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #f9fbfc;
+  border-top: 1px solid #e0e6eb;
+}
+
+/* Bouton Annuler */
+button[mat-button] {
+  background: #f1f5f6;
+  color: #333;
+  border: 2px solid #e0e6e8;
+  border-radius: 6px;
+}
+button[mat-button]:hover {
+   background: #e7f4f5;
+  color: #007C89;
+  transform: translateY(-2px);
+}
+
+/* Bouton principal (Valider / Enregistrer) */
+button[mat-flat-button] {
+  background: #007C89;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  border: none;
+  transition: all 0.3s ease;
+}
+button[mat-flat-button]:hover {
+  background: linear-gradient(135deg, #007C89, #0099a8);
+  box-shadow: 0 4px 10px rgba(0, 124, 137, 0.3);
+  transform: translateY(-1px);
+}
+button[mat-flat-button]:active {
+  transform: scale(0.98);
+}
+
+/* Désactivé */
+button[mat-flat-button][disabled] {
+  background: #cfd8dc;
+  color: #666;
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+/* ======= ANIMATION ======= */
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 600px) {
+  .mat-mdc-dialog-container {
+    max-width: 95%;
+  }
+  button[mat-flat-button],
+  button[mat-button] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+}
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-weight: 550;
+  color: #333;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.form-control {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #dde4e6;
+  font-size: 0.95rem;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007C89;
+  box-shadow: 0 0 6px rgba(0,124,137,0.25);
+}
+
+.form-error {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+mat-dialog-actions {
+  padding: 16px 22px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #f9fbfc;
+  border-top: 1px solid #e0e6eb;
+}
+/* 🔥 Agrandir la zone de texte DESCRIPTION */
+#description_service {
+  min-height: 150px !important;   /* hauteur visible */
+  max-height: 250px !important;   /* limite si très long */
+  resize: vertical !important;    /* autoriser l’agrandissement manuel */
+  overflow-y: auto !important;    /* affichage propre si très long */
+  line-height: 1.45;
+}

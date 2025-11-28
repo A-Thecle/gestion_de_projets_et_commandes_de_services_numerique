@@ -38,7 +38,7 @@ export class CommandesController {
   ) {
     return this.commandesService.createCommande({
       ...createCommandeDto,
-      fichier_joint: fichier_joint?.filename // on stocke juste le nom du fichier
+      fichier_joint: fichier_joint?.filename 
     });
   }
 

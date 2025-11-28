@@ -1,0 +1,47 @@
+<div class="temoignages-container">
+  <h2>Témoignages Clients</h2>
+
+  <div class="testimonials-row" *ngIf="publishedTemoignages.length > 0">
+    <ng-container *ngFor="let t of publishedTemoignages | paginate: { itemsPerPage: 4, currentPage: currentPage }">
+      <article class="testimonial-card">
+        <div class="testimonial-header">
+          <div class="avatar-placeholder">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="client-info">
+            <strong>{{ t.client?.nom }} {{ t.client?.prenom }}</strong>
+            <div class="rating">
+                 <ng-container *ngFor="let _ of getStars(t.note ?? 0)">
+  <span class="star full">★</span>
+</ng-container>
+<ng-container *ngFor="let _ of getEmptyStars(t.note ?? 0)">
+  <span class="star empty">☆</span>
+</ng-container>
+            </div>
+          </div>
+        </div>
+
+        <p class="comment">{{ t.commentaire }}</p>
+
+        <div class="meta">
+          <span class="date">{{ t.date_soumission | date: 'dd/MM/yyyy' }}</span>
+          <span class="project-title" *ngIf="t.projet">{{ t.projet.titre_projet }}</span>
+        </div>
+      </article>
+    </ng-container>
+  </div>
+
+ 
+</div>
+ <pagination-controls
+    (pageChange)="currentPage = $event"
+    previousLabel="« Précédent"
+    nextLabel="Suivant »"
+    class="d-flex justify-content-center mt-4"
+    [autoHide]="false"
+    [responsive]="true"
+    [maxSize]="6"
+    [directionLinks]="true"
+    screenReaderPaginationLabel="Page"
+    screenReaderCurrentLabel="de {currentPage}">
+  </pagination-controls>

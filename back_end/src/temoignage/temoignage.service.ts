@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException , BadRequestException} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Temoignage } from './entities/temoignage.entity';
@@ -7,6 +7,8 @@ import { Utilisateur } from 'src/utilisateurs/entities/utilisateur.entity';
 import { Projet } from 'src/projets/entities/projet.entity';
 import { NotificationService } from 'src/notifications/notifications.service';
 import { NotificationGateway } from 'src/notifications/notification.gateway';
+
+
 
 @Injectable()
 export class TemoignagesService {
@@ -28,28 +30,42 @@ export class TemoignagesService {
     });
   }
 
-  async create(dto: CreateTemoignageDto): Promise<Temoignage> {
-    const user = await this.userRepo.findOne({ where: { id: dto.id_client } });
-    if (!user) throw new NotFoundException("Utilisateur non trouvé");
+async create(dto: CreateTemoignageDto): Promise<Temoignage> {
+  const user = await this.userRepo.findOne({ where: { id: dto.id_client } });
+  if (!user) throw new NotFoundException("Utilisateur non trouvé");
 
-    const projet = await this.projetRepo.findOne({ where: { projet_id: dto.id_projet } });
-    if (!projet) throw new NotFoundException("Projet non trouvé");
+  const projet = await this.projetRepo.findOne({ where: { projet_id: dto.id_projet } });
+  if (!projet) throw new NotFoundException("Projet non trouvé");
 
-    const temoignage = this.temoignageRepo.create({
-      client: user,
-      projet: projet,
-      note: dto.note,
-      commentaire: dto.commentaire,
-    });
+  // 🔹 Vérifier si un témoignage existe déjà pour ce projet
+  const existingTemoignage = await this.temoignageRepo.findOne({
+    where: {
+      client: { id: dto.id_client },
+      projet: { projet_id: dto.id_projet }
+    },
+    relations: ['client', 'projet']
+  });
 
-    const savedTemoignage = await this.temoignageRepo.save(temoignage);
-
-    // Notification à l'admin pour nouveau témoignage
-    const adminMessage = `Nouveau témoignage soumis par ${user.prenom} ${user.nom} pour le projet ${projet.titre_projet}.`;
-    await this.notificationGateway.sendNotificationToAdmins(adminMessage, 'NEW_TESTIMONY');
-
-    return savedTemoignage;
+  if (existingTemoignage) {
+    throw new BadRequestException("Vous avez déjà laissé un témoignage pour ce projet.");
   }
+
+  const temoignage = this.temoignageRepo.create({
+    client: user,
+    projet: projet,
+    note: dto.note,
+    commentaire: dto.commentaire,
+  });
+
+  const savedTemoignage = await this.temoignageRepo.save(temoignage);
+
+  const adminMessage = `Nouveau témoignage soumis par ${user.prenom} ${user.nom} pour le projet ${projet.titre_projet}.`;
+  await this.notificationGateway.sendNotificationToAdmins(adminMessage, 'NEW_TESTIMONY');
+
+  return savedTemoignage;
+}
+
+
 
   async findByProjet(projetId: string): Promise<Temoignage[]> {
     return this.temoignageRepo.find({
@@ -117,6 +133,54 @@ async searchTemoignages(term: string): Promise<Temoignage[]> {
     .orderBy('t.date_soumission', 'DESC')
     .getMany();
 }
+
+async findByClient(clientId: number): Promise<Temoignage[]> {
+  return this.temoignageRepo.find({
+    where: { client: { id: clientId } },
+    relations: ['projet'],
+    order: { date_soumission: 'DESC' },
+  });
+}
+
+async getAvailableProjetsForClient(clientId: number): Promise<Projet[]> {
+  try {
+    // 1️⃣ Récupérer les projets terminés appartenant à ce client
+    const query = this.projetRepo.createQueryBuilder('projet')
+      .leftJoinAndSelect('projet.commande', 'commande')
+      .leftJoinAndSelect('commande.client', 'client')
+      .leftJoinAndSelect('projet.temoignages', 'temoignage')
+      .where('LOWER(projet.etat) = :etat', { etat: 'termine' })
+      .andWhere('client.id = :clientId', { clientId })
+      // 2️⃣ Exclure les projets pour lesquels le client a déjà témoigné
+      .andWhere(qb => {
+        const subQuery = qb
+          .subQuery()
+          .select('t.id_projet')
+          .from('temoignages', 't') // ✅ nom exact de la table
+          .where('t.id_client = :clientId')
+          .getQuery();
+        return 'projet.projet_id NOT IN ' + subQuery;
+      })
+      .setParameter('clientId', clientId);
+
+    // 3️⃣ Exécuter la requête
+    const projetsDisponibles = await query.getMany();
+
+    console.log(`🟢 Client ${clientId} → ${projetsDisponibles.length} projets disponibles`);
+
+    return projetsDisponibles;
+  } catch (error: any) {
+    console.error('❌ Erreur SQL dans getAvailableProjetsForClient :', error?.message || error);
+    throw new BadRequestException('Erreur lors de la récupération des projets disponibles.');
+  }
+}
+
+
+
+
+
+
+
 
 
 
